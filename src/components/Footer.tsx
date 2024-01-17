@@ -1,7 +1,7 @@
 import { Flex, UnorderedList, ListItem } from "@chakra-ui/react";
 
 const Footer = () => {
-    return (
+  return (
     <Flex height={"15vh"} width={"100%"} lineHeight={"1.3"}>
       <UnorderedList
         display={"inline-grid"}
@@ -35,9 +35,7 @@ const Footer = () => {
         </ListItem>
       </UnorderedList>
     </Flex>
-    );
+  );
 };
 
 export default Footer;
-
-

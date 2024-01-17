@@ -5,18 +5,19 @@ import {
   Input,
   Button,
   InputGroup,
-  InputRightElement} from "@chakra-ui/react";
+  InputRightElement,
+} from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const SignInForm = () => {
-    const [inputs, setInputs] = useState({
+  const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
 
-    return (
-    <form style={{width: '300px'}}>
+  return (
+    <form style={{ width: "300px" }}>
       <VStack spacing={4}>
         <Input
           type="email"
@@ -49,14 +50,13 @@ const SignInForm = () => {
         <Button
           w={"100%"}
           transition={"0.3s"}
-          onClick={()=> console.log(inputs)}
+          onClick={() => console.log(inputs)}
         >
           Sign in
         </Button>
       </VStack>
     </form>
-    );
+  );
 };
 
 export default SignInForm;
-
