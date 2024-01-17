@@ -1,34 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom"
+import { ChakraProvider } from '@chakra-ui/react';
+
+import Layout from "./components/Layout"
+
+// Pages
+import Home from "./pages/Home"
+import Card from "./pages/Card"
+import Favorites from "./pages/Favorites"
+import History from "./pages/History"
+import SignIn from "./pages/auth/SignIn"
+import SignUp from "./pages/auth/SignUp"
+
+const router = createBrowserRouter(createRoutesFromElements(
+  <Route path='/' element={<Layout/>}>
+     <Route index element={<Home />} />
+     <Route path ='Card' element={<Card/>}/>
+     <Route path="Favorites" element={<Favorites/>}/>
+     <Route path="History" element={<History/>}/>
+     <Route path="SignIn" element={<SignIn/>}/>
+     <Route path="SignUp" element={<SignUp/>}/>
+  </Route>
+))
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <ChakraProvider >
+      <RouterProvider router={router} />
+    </ChakraProvider>
   )
 }
 
