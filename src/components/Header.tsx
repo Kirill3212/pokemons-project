@@ -17,7 +17,7 @@ const Header = () => {
     return (
         <Flex p={5} justifyContent="space-between" alignItems={'center'}>
             <Link to='/'>
-            <Image src={logo} alt="logo" minWidth={100} maxWidth={130}/>
+            <Image src={logo} alt="logo" width={{base: '80px', sm: '120px', md: '120px'}}/>
             </Link>
             <Flex flexDirection={{base: 'row-reverse', sm: 'row', md: 'row'}}>
             {userIn ? <UserNavbar/> : <GuestNavbar/>}
