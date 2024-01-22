@@ -7,8 +7,20 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+import { useAppDispatch } from "../../hooks/index";
+import { useAppSelector } from "../../hooks/index";
+import { logOut } from "../../store/slices/userSlice";
+import { getAuthStatusSelector } from "../../store/slices/userSlice";
+import { localStorageHelpers } from "../../utils/localStorageHelpers";
+
 function MobileNavbar() {
-  const userIn = false;
+  const userIn = useAppSelector(getAuthStatusSelector);
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    localStorageHelpers.setAuth("");
+    dispatch(logOut());
+  };
 
   return (
     <Menu>
@@ -23,7 +35,7 @@ function MobileNavbar() {
           <Link to="History">
             <MenuItem>History</MenuItem>
           </Link>
-          <MenuItem onClick={() => console.log("Sign out")}>Sign out</MenuItem>
+          <MenuItem onClick={() => handleLogout()}>Sign out</MenuItem>
         </MenuList>
       ) : (
         <MenuList>

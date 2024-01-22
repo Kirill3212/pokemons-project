@@ -16,7 +16,9 @@ const Footer = () => {
         pb={{ base: "30px", sm: "0px", md: "0px" }}
       >
         <ListItem>
-          <a href="/">Twitter</a>
+          <a href="#" target="blank">
+            Twitter
+          </a>
         </ListItem>
         <ListItem>
           <a href="https://www.linkedin.com/" target="blank">
