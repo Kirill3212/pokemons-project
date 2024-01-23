@@ -2,7 +2,18 @@ import { Link } from "react-router-dom";
 import MobileNavbar from "./MobileNavbar";
 import { Flex, Text } from "@chakra-ui/react";
 
+import { useAppDispatch } from "../../hooks";
+import { logOut } from "../../store/slices/userSlice";
+import { localStorageHelpers } from "../../utils/localStorageHelpers";
+
 const UserNavbar = () => {
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    localStorageHelpers.setAuth("");
+    dispatch(logOut());
+  };
+
   return (
     <Flex>
       <Flex
@@ -12,7 +23,7 @@ const UserNavbar = () => {
       >
         <Link to="Favorites">Favorites</Link>
         <Link to="History">History</Link>
-        <Text cursor={"pointer"} onClick={() => console.log("Sign out")}>
+        <Text cursor={"pointer"} onClick={() => handleLogout()}>
           Sign out
         </Text>
       </Flex>

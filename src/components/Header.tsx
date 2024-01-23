@@ -7,11 +7,16 @@ import logo from "../assets/logo.png";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Flex, Image, IconButton } from "@chakra-ui/react";
 
-//@ts-ignore
 import changeTheme from "../utils/changeTheme";
 
+import { useAppSelector } from "../hooks";
+import { getAuthStatusSelector } from "../store/slices/userSlice";
+
 const Header = () => {
-  const userIn = true;
+  const userIn = useAppSelector(getAuthStatusSelector);
+
+  console.log("UserIn authStatus -", userIn);
+
   const { colorMode, toggleColorMode } = changeTheme();
 
   return (

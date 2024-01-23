@@ -9,6 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
+import useSignUp from "../../hooks/useSignUp";
+
 const SignUpForm = () => {
   const [inputs, setInputs] = useState({
     email: "",
@@ -16,6 +18,7 @@ const SignUpForm = () => {
     confirmPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+  const { loading, handleSignUp } = useSignUp();
 
   return (
     <form style={{ width: "300px" }}>
@@ -64,7 +67,8 @@ const SignUpForm = () => {
         <Button
           w={"100%"}
           transition={"0.3s"}
-          onClick={() => console.log(inputs)}
+          isLoading={loading}
+          onClick={() => handleSignUp(inputs)}
         >
           Sign up
         </Button>
