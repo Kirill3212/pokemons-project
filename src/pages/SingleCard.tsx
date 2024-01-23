@@ -1,4 +1,4 @@
-const CardsList = () => {
+const SingleCard = () => {
   return (
     <div>
       Card info
@@ -7,4 +7,4 @@ const CardsList = () => {
   );
 };
 
-export default CardsList;
+export default SingleCard;

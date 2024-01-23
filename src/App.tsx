@@ -13,7 +13,7 @@ import Layout from "./components/Layout";
 
 // Pages
 import Home from "./pages/Home";
-import Card from "./pages/Card";
+import SingleCard from "./pages/SingleCard";
 import Favorites from "./pages/Favorites";
 import History from "./pages/History";
 import SignIn from "./pages/auth/SignIn";
@@ -23,7 +23,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
-      <Route path="Card" element={<Card />} />
+      <Route path="SingleCard" element={<SingleCard />} />
       <Route path="Favorites" element={<Favorites />} />
       <Route path="History" element={<History />} />
       <Route path="SignIn" element={<SignIn />} />
