@@ -4,9 +4,9 @@ import { localStorageHelpers } from '../utils/localStorageHelpers';
 import { logIn } from "./slices/userSlice";
 import { init } from "./actions/init";
 
-const listenerMiddleware = createListenerMiddleware()
+const localStorageListener = createListenerMiddleware()
 
-listenerMiddleware.startListening({
+localStorageListener.startListening({
     actionCreator: init,
 
     effect: (action, listenerApi) => {
@@ -21,7 +21,7 @@ listenerMiddleware.startListening({
     }
 })
 
-listenerMiddleware.startListening({
+localStorageListener.startListening({
     actionCreator: logIn,
 
     effect: (action) => {
@@ -30,4 +30,4 @@ listenerMiddleware.startListening({
     }
 })
 
-export { listenerMiddleware }
+export { localStorageListener }

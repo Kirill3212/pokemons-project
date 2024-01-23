@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 
-import { listenerMiddleware } from "./listenerMiddleware";
+import { localStorageListener } from "./localStorageListener";
 
 import { NameSpace } from "./NameSpace";
 
@@ -15,5 +15,5 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(listenerMiddleware.middleware).concat(pokemonApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(localStorageListener.middleware).concat(pokemonApi.middleware),
 });
