@@ -23,7 +23,7 @@ export const favorites = createSlice({
         addToFavorites: (state, action) => {
             const notExist = state.favorites.every(item => item.id !== action.payload.id)
             if(notExist){
-                state.favorites = [...state.favorites, action.payload]
+                state.favorites.push(action.payload)
             }
         },
         deleteFromFavorites: (state, action) => {

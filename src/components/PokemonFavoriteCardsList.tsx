@@ -18,7 +18,7 @@ const PokemonFavoriteCardsList = () => {
     setIsThrown(true);
     setTimeout(() => {
       navigate("/");
-    }, 1100);
+    }, 1800);
   };
 
   return (
