@@ -1,6 +1,6 @@
 export const NameSpace = {
     App: 'APP',
     User: 'USER',
-    Favorite: 'FAVORITE',
+    Favorites: 'FAVORITES',
     History: 'HISTORY',
 } as const;
