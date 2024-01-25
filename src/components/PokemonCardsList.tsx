@@ -1,13 +1,11 @@
-import { Grid, Text } from "@chakra-ui/react";
-
+import { Grid, Skeleton, Image, Text, Flex } from "@chakra-ui/react";
+import { SinglePokemonResponse } from "../types/pokemonData";
+import errorLoading from "../assets/errorLoading.gif";
 import { useGetPokemonsQuery } from "../api/api";
-
 import PokemonCard from "./PokemonCard";
 
-import { SinglePokemonResponse } from "../types/pokemonData";
-
 const PokemonCardsList = () => {
-  const { data: pokemons, isLoading, isError } = useGetPokemonsQuery(12);
+  const { data: pokemons, isLoading, isError } = useGetPokemonsQuery(16);
 
   return (
     <Grid
@@ -20,16 +18,32 @@ const PokemonCardsList = () => {
         lg: "repeat(4, 1fr)",
       }}
       position={"relative"}
+      justifyItems={"center"}
     >
       {isLoading && (
-        <Text mt={"100px"} position={"absolute"}>
-          Loading...
-        </Text>
+        <>
+          <Skeleton height={"325px"} width={"230px"} borderRadius={10} />
+          <Skeleton height={"325px"} width={"230px"} borderRadius={10} />
+          <Skeleton height={"325px"} width={"230px"} borderRadius={10} />
+          <Skeleton height={"325px"} width={"230px"} borderRadius={10} />
+        </>
       )}
+
       {isError && (
-        <Text mt={"100px"} position={"absolute"}>
-          Error
-        </Text>
+        <Flex
+          flexDirection={"column"}
+          position={"absolute"}
+          width={"320px"}
+          alignItems={"center"}
+        >
+          <Text fontSize={{ base: 14, md: 18, lg: 21 }} mb={7}>
+            Oops! Something went wrong &#128531;
+          </Text>
+          <Image
+            src={errorLoading}
+            width={{ base: "160px", md: "200px", lg: "250px" }}
+          ></Image>
+        </Flex>
       )}
 
       {pokemons?.results &&

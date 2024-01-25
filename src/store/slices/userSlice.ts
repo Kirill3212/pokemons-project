@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { State } from '../../types/store'
 import { NameSpace } from "../NameSpace";
+import { State } from '../../types/store'
 
 type InitialState = {
     authorizationStatus: boolean;
@@ -29,5 +29,5 @@ export const userSlice = createSlice({
 export const getAuthStatusSelector = (state: State) => state[NameSpace.User].authorizationStatus;
 export const getEmailSelector = (state: State) => state[NameSpace.User].email;
 
-export const {logIn, logOut} = userSlice.actions
+export const { logIn, logOut } = userSlice.actions
 
