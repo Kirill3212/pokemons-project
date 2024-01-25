@@ -65,7 +65,7 @@ const PokemonFavoriteCardsList = () => {
               onClick={() => goForPokemons()}
               textDecoration={"underline"}
             >
-              Add Pokemons
+              Catch Pokemons
             </Text>
           </Heading>
           {isThrown ? (

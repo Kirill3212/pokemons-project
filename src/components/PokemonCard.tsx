@@ -1,7 +1,7 @@
 import { GridItem, Image, Heading, Button, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import pokeballHeartActive from "../assets/pokeballHeartActive.png";
+import pokeballHeartNotActive from "../assets/pokeballHeartNotActive.png";
 import { SinglePokemonResponse } from "../types/pokemonData";
 import { SinglePokemonData } from "../types/pokemonData";
 import { useAppDispatch, useAppSelector } from "../hooks";
@@ -70,16 +70,17 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
         </Heading>
 
         {isLiked ? (
-          <FaHeart
+          <Image
             cursor={"pointer"}
-            color={"red"}
-            fontSize={"18px"}
+            width={"20px"}
+            src={pokeballHeartActive}
             onClick={() => handleAddToFavorites()}
           />
         ) : (
-          <FaRegHeart
+          <Image
             cursor={"pointer"}
-            fontSize={"18px"}
+            width={"20px"}
+            src={pokeballHeartNotActive}
             onClick={() => handleAddToFavorites()}
           />
         )}
