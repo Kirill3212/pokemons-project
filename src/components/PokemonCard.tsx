@@ -1,9 +1,12 @@
 import { GridItem, Image, Heading, Button, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import pokeballHeartActive from "../assets/pokeballHeartActive.png";
 import pokeballHeartNotActive from "../assets/pokeballHeartNotActive.png";
 import { SinglePokemonResponse } from "../types/pokemonData";
 import { SinglePokemonData } from "../types/pokemonData";
+import { getFavoritesSelector } from "../store/slices/favoritesSlice";
+import { getAuthStatusSelector } from "../store/slices/userSlice";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
   addToFavorites,
@@ -17,15 +20,17 @@ interface PokemonCardProps {
 const PokemonCard = ({ pokemon }: PokemonCardProps) => {
   const [pokemonData, setPokemonData] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
-  const favPokemons = useAppSelector((state) => state.FAVORITES.favorites);
+  const favPokemons = useAppSelector(getFavoritesSelector);
+  const isAuthorized = useAppSelector(getAuthStatusSelector);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(pokemon.url)
       .then((res) => res.json())
       .then((res) => {
         setPokemonData(res);
-        checkIfIsLiked(res);
+        if (isAuthorized) checkIfIsLiked(res);
       });
   }, []);
 
@@ -37,10 +42,12 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
   };
 
   const handleAddToFavorites = () => {
-    setIsLiked(!isLiked);
-    isLiked
-      ? dispatch(deleteFromFavorites(pokemonData.id))
-      : dispatch(addToFavorites(pokemonData));
+    if (isAuthorized) {
+      setIsLiked(!isLiked);
+      isLiked
+        ? dispatch(deleteFromFavorites(pokemonData.id))
+        : dispatch(addToFavorites(pokemonData));
+    } else navigate("/SignUp");
   };
 
   return (

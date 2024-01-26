@@ -8,9 +8,10 @@ import { useAppSelector } from "../hooks";
 import { useNavigate } from "react-router-dom";
 
 import PokemonFavoriteCard from "./PokemonFavoriteCard";
+import { getFavoritesSelector } from "../store/slices/favoritesSlice";
 
 const PokemonFavoriteCardsList = () => {
-  const favorites = useAppSelector((state) => state.FAVORITES.favorites);
+  const favorites = useAppSelector(getFavoritesSelector);
   const [isThrown, setIsThrown] = useState(false);
   const navigate = useNavigate();
 

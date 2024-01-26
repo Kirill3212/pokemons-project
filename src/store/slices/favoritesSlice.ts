@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { NameSpace } from "../NameSpace";
+import { State } from "../../types/store";
 import { SinglePokemonData } from "../../types/pokemonData";
 
 type InitialState = {
@@ -15,7 +16,7 @@ export const favorites = createSlice({
     initialState,
     reducers: {
         setFavorites: (state, action) => {
-            state.favorites = [...action.payload]
+            state.favorites = action.payload
         },
         clearFavorites: (state) => {
             state.favorites = []
@@ -31,5 +32,7 @@ export const favorites = createSlice({
         }
     }
 })
+
+export const getFavoritesSelector = (state: State) => state[NameSpace.Favorites].favorites;
 
 export const { setFavorites, clearFavorites, addToFavorites, deleteFromFavorites } = favorites.actions

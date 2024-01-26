@@ -2,6 +2,7 @@ import { createListenerMiddleware } from "@reduxjs/toolkit";
 import { localStorageHelpers } from '../utils/localStorageHelpers';
 
 import { setFavorites, addToFavorites, deleteFromFavorites } from "./slices/favoritesSlice";
+import { setHistory } from './slices/historySlice'
 import { logIn } from "./slices/userSlice";
 
 import { init } from "./actions/init";
@@ -20,6 +21,7 @@ localStorageListenerMiddleware.startListening({
             const user = localStorageHelpers.getUser(email);
             listenerApi.dispatch(logIn(user))
             listenerApi.dispatch(setFavorites(user?.favorites))
+            listenerApi.dispatch(setHistory(user?.history))
         }
     }
 })
