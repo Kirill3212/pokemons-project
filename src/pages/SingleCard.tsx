@@ -140,7 +140,7 @@ const SingleCard = () => {
             backgroundImage={
               "linear-gradient(to bottom, #ffffff, #ffecff, #ffd3da, #ffd27d, #f8ef09)"
             }
-            boxSize={{ base: "150px", md: "150px", lg: "200px" }}
+            boxSize={{ base: "150px", md: "180px", lg: "200px" }}
             justifyContent={"center"}
             alignItems={"center"}
           >
@@ -163,7 +163,7 @@ const SingleCard = () => {
         >
           <VStack height={"50%"} alignItems={"left"} mt={7}>
             <Flex>
-              <Text fontWeight={500} color={"#91C656"}>
+              <Text fontWeight={500} color={"#83C785"}>
                 Type:
               </Text>
               <Text ml={2}>{pokemon?.types[0].type.name}</Text>
@@ -176,36 +176,41 @@ const SingleCard = () => {
             </Flex>
             <Flex>
               <Text color={"#24B6C8"} fontWeight={500}>
+                Height:
+              </Text>
+              <Text ml={2}> {pokemon?.height}</Text>
+            </Flex>
+            <Flex>
+              <Text color={"#DE843A"} fontWeight={500}>
                 Weight:
               </Text>
               <Text ml={2}> {pokemon?.weight}</Text>
             </Flex>
           </VStack>
           <VStack
-            mt={{ base: "20px", md: 0, lg: 0 }}
+            mt={{ base: "5px", md: 0, lg: 0 }}
+            mb={{ base: "15px", md: 0, lg: 0 }}
             pr={{ base: "22px", md: 0, lg: 0 }}
           >
-            <Text color="green.500" fontWeight={600}>
+            <Text color="red.500" fontWeight={600} mt={3}>
               Attacks
             </Text>
             <Flex
-              justifyContent={{
-                base: "space-around",
-                md: "space-around",
-                lg: "space-between",
-              }}
+              justifyContent={"space-around"}
               alignItems={"center"}
               width={"100%"}
+              bg={"purple.600"}
+              borderRadius={6}
             >
               <ArrowLeftIcon
                 cursor={"pointer"}
                 color="#F6C52E"
                 width={"13px"}
                 transition={"0.2s"}
-                _hover={{ color: "green" }}
+                _hover={{ color: "yellow.500" }}
                 onClick={changeAttackBackwards}
               />
-              <Text pb={1} userSelect={"none"}>
+              <Text pb={1} userSelect={"none"} color={"red.300"}>
                 {attacks[attackPosition]}
               </Text>
               <ArrowRightIcon
@@ -213,7 +218,7 @@ const SingleCard = () => {
                 color="#F6C52E"
                 width={"13px"}
                 transition={"0.2s"}
-                _hover={{ color: "green" }}
+                _hover={{ color: "yellow.500" }}
                 onClick={changeAttackForwards}
               />
             </Flex>
