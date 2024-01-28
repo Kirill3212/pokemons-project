@@ -4,19 +4,12 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-import { ChakraProvider } from "@chakra-ui/react";
-
-import { Provider } from "react-redux";
-import { store } from "./store/store";
 
 import { init } from "./store/actions/init";
 import { useAppDispatch } from "./hooks/index";
 
-import Layout from "./components/Layout";
-
-import ErrorBoundary from "./components/ErrorBoundary";
-
 // Pages
+import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import SingleCard from "./pages/SingleCard";
 import Favorites from "./pages/Favorites";
@@ -40,18 +33,10 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  // const dispatch = useAppDispatch();
-  // dispatch(init());
+  const dispatch = useAppDispatch();
+  dispatch(init());
 
-  return (
-    <ChakraProvider>
-      <ErrorBoundary>
-        <Provider store={store}>
-          <RouterProvider router={router} />
-        </Provider>
-      </ErrorBoundary>
-    </ChakraProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

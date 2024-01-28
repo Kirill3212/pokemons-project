@@ -24,8 +24,6 @@ const SearchBarAndDisplay = ({ homeInputSearch }: string) => {
     debouncedSearchInput || null
   );
 
-  console.log("Loading is -", isLoading);
-
   return (
     <Flex flexDirection={"column"} alignItems={"center"} mb={"40px"}>
       <Flex width={{ base: "300px", md: "400px", lg: "500px" }} mt={5}>
