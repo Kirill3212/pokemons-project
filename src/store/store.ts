@@ -3,14 +3,16 @@ import { localStorageListenerMiddleware } from "./localStorageListenerMiddleware
 import { NameSpace } from "./NameSpace"
 
 // Slices
-import { userSlice } from "./slices/userSlice";
+import { user } from "./slices/userSlice";
 import { favorites } from "./slices/favoritesSlice";
+import { history } from './slices/historySlice';
 import { pokemonApi } from "../api/api";
 
 const rootReducer = combineReducers({
     [pokemonApi.reducerPath]: pokemonApi.reducer,
-    [NameSpace.User]: userSlice.reducer,
-    [NameSpace.Favorites]: favorites.reducer
+    [NameSpace.User]: user.reducer,
+    [NameSpace.Favorites]: favorites.reducer,
+    [NameSpace.History]: history.reducer
 });
 
 export const store = configureStore({

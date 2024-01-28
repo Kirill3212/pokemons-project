@@ -1,7 +1,7 @@
 import { createListenerMiddleware } from "@reduxjs/toolkit";
 import { localStorageHelpers } from '../utils/localStorageHelpers';
 
-import { setFavorites, addToFavorites, deleteFromFavorites } from "./slices/favoritesSlice";
+import { setFavorites, addToFavorites, deleteFromFavorites, clearFavorites } from "./slices/favoritesSlice";
 import { setHistory } from './slices/historySlice'
 import { logIn } from "./slices/userSlice";
 
@@ -13,8 +13,6 @@ localStorageListenerMiddleware.startListening({
     actionCreator: init,
 
     effect: (action, listenerApi) => {
-        // Action doest not fire on reload
-        console.log('fire action')
         action.payload = undefined;
         const email = localStorageHelpers.getAuth();
         if(email){
@@ -57,4 +55,16 @@ localStorageListenerMiddleware.startListening({
     }
 })
 
+localStorageListenerMiddleware.startListening({
+    actionCreator: clearFavorites,
+
+    effect: () => {
+        const email = localStorageHelpers.getAuth()
+        if(email){
+            localStorageHelpers.clearFavorites(email)
+        }
+    }
+})
+
 export { localStorageListenerMiddleware }
+

@@ -42,5 +42,16 @@ export const localStorageHelpers = {
                 JSON.stringify({...parsed, favorites: updatedFavorites})
             );
         }
+    },
+
+    clearFavorites: (email: string) => {
+        const e = localStorage.getItem(email)
+        if(e){
+            const parsed = JSON.parse(e)
+            localStorage.setItem(
+                email,
+                JSON.stringify({...parsed, favorites: []})
+            );
+        }
     }
 }

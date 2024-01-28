@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { NameSpace } from "../NameSpace";
+import { State } from "../../types/store";
 
 type InitialState = {
     history: []
@@ -24,5 +25,7 @@ export const history = createSlice({
         // }
     }
 })
+
+export const getHistorySelector = (state: State) => state[NameSpace.History].history;
 
 export const { setHistory, clearHistory } = history.actions

@@ -9,7 +9,12 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 
+import { init } from "./store/actions/init";
+import { useAppDispatch } from "./hooks/index";
+
 import Layout from "./components/Layout";
+
+import ErrorBoundary from "./components/ErrorBoundary";
 
 // Pages
 import Home from "./pages/Home";
@@ -18,6 +23,7 @@ import Favorites from "./pages/Favorites";
 import History from "./pages/History";
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
+import Search from "./pages/Search";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,16 +34,22 @@ const router = createBrowserRouter(
       <Route path="History" element={<History />} />
       <Route path="SignIn" element={<SignIn />} />
       <Route path="SignUp" element={<SignUp />} />
+      <Route path="Search" element={<Search />} />
     </Route>
   )
 );
 
 function App() {
+  // const dispatch = useAppDispatch();
+  // dispatch(init());
+
   return (
     <ChakraProvider>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
+      </ErrorBoundary>
     </ChakraProvider>
   );
 }
