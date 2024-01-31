@@ -34,11 +34,11 @@ const PokemonFavoriteCardsList = () => {
         <Flex flexDirection={"column"}>
           {favorites.length > 1 ? (
             <Flex
-              alignItems={"center"}
+              justifyContent={{ base: "center", md: "right", lg: "right" }}
               justifySelf={"center"}
+              alignItems={"center"}
               width={"100%"}
               mb={2}
-              justifyContent={{ base: "center", md: "right", lg: "right" }}
             >
               <Text
                 ml={3}
@@ -52,9 +52,9 @@ const PokemonFavoriteCardsList = () => {
               </Text>
               <Image
                 src={releaseAll}
+                cursor={"pointer"}
                 width={"16px"}
                 ml={4}
-                cursor={"pointer"}
               ></Image>
             </Flex>
           ) : null}
@@ -67,8 +67,8 @@ const PokemonFavoriteCardsList = () => {
               md: "repeat(3, 1fr)",
               lg: "repeat(5, 1fr)",
             }}
-            position={"relative"}
             justifyItems={"center"}
+            position={"relative"}
           >
             {favorites &&
               favorites.map((pokemon) => (
@@ -78,27 +78,31 @@ const PokemonFavoriteCardsList = () => {
         </Flex>
       ) : (
         <Flex
+          justifyContent={"center"}
           flexDirection={"column"}
           alignItems={"center"}
-          justifyContent={"center"}
           mt={-2}
         >
           <Image
             src={collectionEmpty}
-            width={{ base: "80px", md: "110px", lg: "130px" }}
+            width={{ base: "80px", md: "110px", lg: "110px" }}
+            mb={"10px"}
           ></Image>
           <Heading
-            fontSize={{ base: "10px", md: "15px", lg: "20px" }}
+            fontSize={{ base: "13px", md: "15px", lg: "20px" }}
+            fontWeight={"23px"}
             textAlign={"center"}
           >
             It looks empty &#128517; let's add pokemons to your collection.
             <Text
+              ml={2}
               as={"span"}
               color={"#F6C52E"}
-              ml={2}
+              fontWeight={"bold"}
               cursor={"pointer"}
+              transition={"0.3s"}
+              _hover={{ color: "red.500" }}
               onClick={() => goForPokemons()}
-              textDecoration={"underline"}
             >
               Catch Pokemons
             </Text>
@@ -106,7 +110,8 @@ const PokemonFavoriteCardsList = () => {
           {isThrown ? (
             <Image
               src={pokeball}
-              width={{ base: "150px", md: "220px", lg: "320px" }}
+              mt={"30px"}
+              width={{ base: "150px", md: "220px", lg: "250px" }}
               ml={{ base: "50px", md: "120px", lg: "220px" }}
             />
           ) : null}

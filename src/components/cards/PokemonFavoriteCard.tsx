@@ -13,6 +13,10 @@ interface PokemonFavoriteCardProps {
 const PokemonFavoriteCard = ({ pokemon }: PokemonFavoriteCardProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const mainImage = pokemon?.sprites.other.dream_world.front_default;
+  const backupImage = pokemon?.sprites.front_default;
+
   const dataToPass = {
     data: pokemon,
     invokePage: "Favorites",
@@ -37,11 +41,7 @@ const PokemonFavoriteCard = ({ pokemon }: PokemonFavoriteCardProps) => {
         <IoMdCloseCircle color="red" size={"18px"} />
       </Box>
       <Image
-        src={
-          pokemon?.sprites.other.dream_world.front_default
-            ? pokemon?.sprites.other.dream_world.front_default
-            : pokemon?.sprites.front_default
-        }
+        src={mainImage ? mainImage : backupImage}
         boxSize="150px"
         backgroundImage={
           "linear-gradient(to bottom, #ffffff, #ffecff, #ffd3da, #ffd27d, #f8ef09)"

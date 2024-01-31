@@ -1,4 +1,4 @@
-import { Flex, Heading, Text, Image } from "@chakra-ui/react";
+import { Flex, Text, Image } from "@chakra-ui/react";
 import searchSuggestion from "../assets/searchSuggestion.png";
 // import { useEffect } from "react";
 
@@ -27,9 +27,9 @@ const SearchPageSuggestions = () => {
           width={{ base: "90px", md: "110px", lg: "130px" }}
           mb={2}
         ></Image>
-        <Heading fontSize={{ base: 13, md: 16, lg: 19 }} textAlign={"center"}>
+        <Text fontSize={{ base: 13, md: 16, lg: 19 }} textAlign={"center"}>
           Don't know which pokemon you want to catch ?
-        </Heading>
+        </Text>
       </Flex>
       <Flex
         mt={10}
