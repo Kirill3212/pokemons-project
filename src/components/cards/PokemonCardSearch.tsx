@@ -1,16 +1,24 @@
-import { Image, Heading, Button, Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+
+import { Image, Heading, Button, Flex, Text } from "@chakra-ui/react";
+
 import { useNavigate } from "react-router-dom";
-import pokeballHeartActive from "../assets/pokeballHeartActive.png";
-import pokeballHeartNotActive from "../assets/pokeballHeartNotActive.png";
-import { SinglePokemonData } from "../types/pokemonData";
-import { getFavoritesSelector } from "../store/slices/favoritesSlice";
-import { getAuthStatusSelector } from "../store/slices/userSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+
+import pokeballHeartActive from "../../assets/pokeballHeartActive.png";
+import pokeballHeartNotActive from "../../assets/pokeballHeartNotActive.png";
+
+import { SinglePokemonData } from "../../types/pokemonData";
+
+import { useAppDispatch, useAppSelector } from "../../hooks";
+
+import useShowToast from "../../hooks/useShowToast";
+
+import { getFavoritesSelector } from "../../store/slices/favoritesSlice";
+import { getAuthStatusSelector } from "../../store/slices/userSlice";
 import {
   addToFavorites,
   deleteFromFavorites,
-} from "../store/slices/favoritesSlice";
+} from "../../store/slices/favoritesSlice";
 
 interface PokemonCardSearchProps {
   pokemon: SinglePokemonData;
@@ -22,6 +30,10 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
   const isAuthorized = useAppSelector(getAuthStatusSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const toast = useShowToast();
+
+  const mainImage = pokemon?.sprites.other.dream_world.front_default;
+  const backupImage = pokemon?.sprites.front_default;
 
   const dataToPass = {
     data: pokemon,
@@ -47,7 +59,7 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
       isLiked
         ? dispatch(deleteFromFavorites(pokemon?.id))
         : dispatch(addToFavorites(pokemon));
-    } else navigate("/SignUp");
+    } else toast("Sorry :(", "Need to sign in", "error");
   };
 
   return (
@@ -60,28 +72,24 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
       display={{ base: "column", md: "flex", lg: "flex" }}
     >
       <Image
-        src={
-          pokemon?.sprites.other.dream_world.front_default
-            ? pokemon?.sprites.other.dream_world.front_default
-            : pokemon?.sprites.front_default
-        }
+        src={mainImage ? mainImage : backupImage}
         boxSize={{ base: "150px", md: "150px", lg: "180px" }}
-        width={{ base: "70%", md: "50%", lg: "50%" }}
         maxWidth={"170px"}
         backgroundImage={
           "linear-gradient(to bottom, #ffffff, #ffecff, #ffd3da, #ffd27d, #f8ef09)"
         }
         borderRadius={8}
-        ml={{ base: 8, md: 0, lg: 0 }}
+        ml={{ base: 6, md: 0, lg: 0 }}
       ></Image>
       <Flex
         flexDirection={"column"}
         justifyContent={"space-between"}
-        width={"200px"}
+        minW={"200px"}
       >
         <Flex
           gap={3}
           justifyContent={"center"}
+          alignItems={"center"}
           mt={{ base: 3, md: 0, lg: 0 }}
           mb={{ base: 3, md: 0, lg: 0 }}
         >
@@ -114,7 +122,7 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
         </Flex>
         <Flex>
           <Text fontWeight={500} color={"#6F45B9"}>
-            Expirience:
+            Experience:
           </Text>
           <Text ml={2}>{pokemon?.base_experience}</Text>
         </Flex>
@@ -136,7 +144,7 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
           onClick={() =>
             isAuthorized
               ? navigate("/SingleCard", { state: dataToPass })
-              : navigate("/SignUp")
+              : toast("Sorry :(", "Need to sign in", "error")
           }
         >
           Show more

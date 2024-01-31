@@ -14,7 +14,7 @@ const UserNavbar = () => {
   const handleLogout = () => {
     localStorageHelpers.setAuth("");
     dispatch(logOut());
-    navigate("/SignIn");
+    navigate("/");
   };
 
   return (

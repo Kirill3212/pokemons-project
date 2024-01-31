@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import SearchHeader from "../components/SearchHeader";
-import PokemonCardsList from "../components/PokemonCardsList";
+import PokemonCardsList from "../components/cardsLists/PokemonCardsList";
 import SearchBarHomePage from "../components/SearchBarHomePage";
 
 const Home = () => {

@@ -1,30 +1,49 @@
 import { useState, useEffect } from "react";
+
 import { Image, Heading, Flex, Text, VStack } from "@chakra-ui/react";
-import { useNavigate, useLocation } from "react-router-dom";
-import pokeballHeartActive from "../assets/pokeballHeartActive.png";
-import pokeballHeartNotActive from "../assets/pokeballHeartNotActive.png";
-import { SinglePokemonData } from "../types/pokemonData";
 import { ArrowLeftIcon } from "@chakra-ui/icons";
 import { ArrowRightIcon } from "@chakra-ui/icons";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { getFavoritesSelector } from "../store/slices/favoritesSlice";
-import { getAuthStatusSelector } from "../store/slices/userSlice";
+
+import { useNavigate, useLocation } from "react-router-dom";
+
+import pokeballHeartActive from "../assets/pokeballHeartActive.png";
+import pokeballHeartNotActive from "../assets/pokeballHeartNotActive.png";
+import meowText from "../assets/meowText.png";
+import loadingSearch from "../assets/loadingSearch.gif";
+
+import { SinglePokemonData } from "../types/pokemonData";
+
 import { useAppDispatch, useAppSelector } from "../hooks";
+
 import {
   addToFavorites,
   deleteFromFavorites,
 } from "../store/slices/favoritesSlice";
+import { getFavoritesSelector } from "../store/slices/favoritesSlice";
+import { getAuthStatusSelector } from "../store/slices/userSlice";
 
 const SingleCard = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [attackPosition, setAttackPosition] = useState(0);
+  const [meow, setMeow] = useState(false);
   const location = useLocation();
-  const pokemon = location.state.data;
-  const favPokemons = useAppSelector(getFavoritesSelector);
+  const favoritePokemons = useAppSelector(getFavoritesSelector);
   const isAuthorized = useAppSelector(getAuthStatusSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const pokemon = location.state.data;
+  const invokedPage = location.state.invokePage;
+  const mainImage = pokemon?.sprites.other.showdown.front_default;
+  const backupImage = pokemon?.sprites.front_default;
   const attacks = pokemon?.moves.map((move: string) => move.move.name);
+
+  const pokemonName = pokemon?.name;
+  const pokemonType = pokemon?.types[0].type.name;
+  const pokemonExperience = pokemon?.base_experience;
+  const pokemonHeight = pokemon?.height;
+  const pokemonWeight = pokemon?.weight;
 
   useEffect(() => {
     if (isAuthorized) {
@@ -33,7 +52,9 @@ const SingleCard = () => {
   });
 
   const checkIfIsLiked = (pokemon: SinglePokemonData) => {
-    const pokemonIsLiked = favPokemons.some((pok) => pok.id == pokemon?.id);
+    const pokemonIsLiked = favoritePokemons.some(
+      (pok) => pok.id == pokemon?.id
+    );
     if (pokemonIsLiked) {
       setIsLiked(true);
     } else setIsLiked(false);
@@ -48,6 +69,14 @@ const SingleCard = () => {
     } else navigate("/SignUp");
   };
 
+  const showMeow = () => {
+    setMeow(true);
+    setTimeout(() => {
+      setMeow(false);
+    }, 2000);
+  };
+
+  // Slider of Attacks
   const changeAttackForwards = () => {
     let next = attackPosition;
     if (next >= attacks.length - 1) {
@@ -64,30 +93,52 @@ const SingleCard = () => {
   return (
     <Flex
       width={'"100%"'}
-      mt={"100px"}
+      mt={"50px"}
       justifyContent={"center"}
       alignItems={"center"}
-      mb={"50px"}
+      mb={"30px"}
       flexDirection={"column"}
+      position={"relative"}
     >
       <Flex
         width={{ base: "240px", md: "400px", lg: "400px" }}
         alignItems={"center"}
-        mb={4}
-        color={"red.400"}
-        cursor={"pointer"}
-        transition={"0.2s"}
-        _hover={{ color: "red.600" }}
-        onClick={() =>
-          navigate(
-            location.state.invokePage == "Home"
-              ? "/"
-              : "/" + location.state.invokePage
-          )
-        }
+        justifyContent={"space-between"}
+        mb={"-14px"}
       >
-        <ArrowBackIcon mr={2} />
-        <Text>Back to {location.state.invokePage}</Text>
+        <Flex
+          alignItems={"center"}
+          cursor={"pointer"}
+          color={"red.400"}
+          transition={"0.2s"}
+          _hover={{ color: "red.600" }}
+          onClick={() =>
+            navigate(invokedPage == "Home" ? "/" : "/" + invokedPage)
+          }
+        >
+          <ArrowBackIcon mr={2} />
+          <Text>
+            {invokedPage === "Home"
+              ? `Back ${invokedPage}`
+              : `Back to ${invokedPage}`}
+          </Text>
+        </Flex>
+        <VStack position={"relative"}>
+          {meow && (
+            <Image
+              src={meowText}
+              width={"30px"}
+              position={"absolute"}
+              right={"55px"}
+            />
+          )}
+          <Image
+            src={loadingSearch}
+            width={"75px"}
+            cursor={"pointer"}
+            onMouseOver={showMeow}
+          />
+        </VStack>
       </Flex>
       <Flex
         boxShadow={"0px 0px 3px grey"}
@@ -99,6 +150,7 @@ const SingleCard = () => {
         width={{ base: "240px", md: "400px", lg: "400px" }}
       >
         <VStack>
+          {/* Header of the Card */}
           <Flex justifyContent={"center"} width={"100%"} alignItems={"center"}>
             <Heading
               fontSize={20}
@@ -107,7 +159,7 @@ const SingleCard = () => {
               color={"#F6C52E"}
               ml={2}
             >
-              {pokemon?.name}
+              {pokemonName}
             </Heading>
             <Flex
               gap={3}
@@ -135,6 +187,8 @@ const SingleCard = () => {
               )}
             </Flex>
           </Flex>
+
+          {/* Image of the Pokemon */}
           <Flex
             borderRadius={10}
             backgroundImage={
@@ -145,14 +199,10 @@ const SingleCard = () => {
             alignItems={"center"}
           >
             <Image
-              src={
-                pokemon?.sprites.other.showdown.front_default
-                  ? pokemon?.sprites.other.showdown.front_default
-                  : pokemon?.sprites.front_default
-              }
-              borderRadius={8}
+              src={mainImage ? mainImage : backupImage}
               width={{ base: "50%", md: "50%", lg: "55%" }}
               height={{ base: "50%", md: "50%", lg: "55%" }}
+              borderRadius={8}
             ></Image>
           </Flex>
         </VStack>
@@ -161,32 +211,35 @@ const SingleCard = () => {
           width={"200px"}
           pl={{ base: "35px", md: 0, lg: 0 }}
         >
+          {/* Stats of the Pokemon */}
           <VStack height={"50%"} alignItems={"left"} mt={7}>
             <Flex>
               <Text fontWeight={500} color={"#83C785"}>
                 Type:
               </Text>
-              <Text ml={2}>{pokemon?.types[0].type.name}</Text>
+              <Text ml={2}>{pokemonType}</Text>
             </Flex>
             <Flex>
               <Text fontWeight={500} color={"#6F45B9"}>
                 Experience:
               </Text>
-              <Text ml={2}>{pokemon?.base_experience}</Text>
+              <Text ml={2}>{pokemonExperience}</Text>
             </Flex>
             <Flex>
               <Text color={"#24B6C8"} fontWeight={500}>
                 Height:
               </Text>
-              <Text ml={2}> {pokemon?.height}</Text>
+              <Text ml={2}>{pokemonHeight}</Text>
             </Flex>
             <Flex>
               <Text color={"#DE843A"} fontWeight={500}>
                 Weight:
               </Text>
-              <Text ml={2}> {pokemon?.weight}</Text>
+              <Text ml={2}>{pokemonWeight}</Text>
             </Flex>
           </VStack>
+
+          {/*Attack Slider */}
           <VStack
             mt={{ base: "5px", md: 0, lg: 0 }}
             mb={{ base: "15px", md: 0, lg: 0 }}

@@ -20,12 +20,15 @@ export const history = createSlice({
         clearHistory: (state) => {
             state.history = []
         },
-        // updateHistory: (state, action) => {
-        //     state.history.push(action.payload)
-        // }
+        updateHistory: (state, action) => {
+            const notExist = state.history.every(item => item !== action.payload)
+            if(notExist){
+                state.history.push(action.payload)
+            }
+        }
     }
 })
 
 export const getHistorySelector = (state: State) => state[NameSpace.History].history;
 
-export const { setHistory, clearHistory } = history.actions
+export const { setHistory, clearHistory, updateHistory } = history.actions

@@ -4,32 +4,38 @@ import { GridItem, Image, Heading, Button, Flex } from "@chakra-ui/react";
 
 import { useNavigate } from "react-router-dom";
 
-import pokeballHeartActive from "../assets/pokeballHeartActive.png";
-import pokeballHeartNotActive from "../assets/pokeballHeartNotActive.png";
+import pokeballHeartActive from "../../assets/pokeballHeartActive.png";
+import pokeballHeartNotActive from "../../assets/pokeballHeartNotActive.png";
 
-import { SinglePokemonResponse } from "../types/pokemonData";
-import { SinglePokemonData } from "../types/pokemonData";
+import { SinglePokemonResponse } from "../../types/pokemonData";
+import { SinglePokemonData } from "../../types/pokemonData";
 
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+
+import useShowToast from "../../hooks/useShowToast";
 
 import {
   addToFavorites,
   deleteFromFavorites,
-} from "../store/slices/favoritesSlice";
-import { getFavoritesSelector } from "../store/slices/favoritesSlice";
-import { getAuthStatusSelector } from "../store/slices/userSlice";
+} from "../../store/slices/favoritesSlice";
+import { getFavoritesSelector } from "../../store/slices/favoritesSlice";
+import { getAuthStatusSelector } from "../../store/slices/userSlice";
 
 interface PokemonCardProps {
   pokemon: SinglePokemonResponse;
 }
 
 const PokemonCard = ({ pokemon }: PokemonCardProps) => {
-  const [pokemonData, setPokemonData] = useState(null);
+  const [pokemonData, setPokemonData] = useState<SinglePokemonData>();
   const [isLiked, setIsLiked] = useState(false);
-  const favPokemons = useAppSelector(getFavoritesSelector);
+  const favoritePokemons = useAppSelector(getFavoritesSelector);
   const isAuthorized = useAppSelector(getAuthStatusSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const toast = useShowToast();
+
+  const mainImage = pokemonData?.sprites.other.dream_world.front_default;
+  const backupImage = pokemonData?.sprites.front_default;
 
   const dataToPass = {
     data: pokemonData,
@@ -46,7 +52,9 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
   }, []);
 
   const checkIfIsLiked = (res: SinglePokemonData) => {
-    const pokemonIsLiked = favPokemons.some((pokemon) => pokemon.id == res.id);
+    const pokemonIsLiked = favoritePokemons.some(
+      (pokemon) => pokemon.id == res.id
+    );
     if (pokemonIsLiked) {
       setIsLiked(true);
     }
@@ -56,9 +64,9 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
     if (isAuthorized) {
       setIsLiked(!isLiked);
       isLiked
-        ? dispatch(deleteFromFavorites(pokemonData.id))
+        ? dispatch(deleteFromFavorites(pokemonData?.id))
         : dispatch(addToFavorites(pokemonData));
-    } else navigate("/SignUp");
+    } else toast("Sorry :(", "Need to sign in", "error");
   };
 
   return (
@@ -105,25 +113,21 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
         )}
       </Flex>
       <Image
-        src={
-          pokemonData?.sprites.other.dream_world.front_default
-            ? pokemonData?.sprites.other.dream_world.front_default
-            : pokemonData?.sprites.front_default
-        }
-        boxSize="170px"
+        src={mainImage ? mainImage : backupImage}
         backgroundImage={
           "linear-gradient(to bottom, #ffffff, #ffecff, #ffd3da, #ffd27d, #f8ef09)"
         }
+        borderRadius={8}
+        boxSize="170px"
         mt={4}
         mb={4}
-        borderRadius={8}
       ></Image>
       <Button
         w={"100%"}
         onClick={() =>
           isAuthorized
             ? navigate("/SingleCard", { state: dataToPass })
-            : navigate("/SignUp")
+            : toast("Sorry :(", "Need to sign in", "error")
         }
       >
         Show more

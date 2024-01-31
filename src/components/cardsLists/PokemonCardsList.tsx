@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
   Grid,
   Skeleton,
@@ -8,11 +9,14 @@ import {
   VStack,
   Divider,
 } from "@chakra-ui/react";
-import { SinglePokemonResponse } from "../types/pokemonData";
-import errorLoading from "../assets/errorLoading.gif";
-import pokeballHeartActive from "../assets/pokeballHeartActive.png";
-import { useGetPokemonsQuery } from "../api/api";
-import PokemonCard from "./PokemonCard";
+import errorLoading from "../../assets/errorLoading.gif";
+import pokeballHeartActive from "../../assets/pokeballHeartActive.png";
+
+import { SinglePokemonResponse } from "../../types/pokemonData";
+
+import { useGetPokemonsQuery } from "../../api/api";
+
+import PokemonCard from "../cards/PokemonCard";
 
 const PokemonCardsList = () => {
   const [cardsToShow, setCardsToShow] = useState(20);
@@ -67,25 +71,31 @@ const PokemonCardsList = () => {
             <PokemonCard key={pokemon.name} pokemon={pokemon} />
           ))}
       </Grid>
-      <Flex mt={6} width={"400px"} alignItems={"center"}>
-        <Divider orientation="horizontal" mr={3} borderWidth="1px" />
-        <Image
-          src={pokeballHeartActive}
-          cursor={"pointer"}
-          mt={5}
-          transition={"0.3s"}
-          _hover={{ transform: "scale(1.2)" }}
-          width={"30px"}
-          onClick={() => setCardsToShow(cardsToShow + 8)}
-          pb={4}
-        ></Image>
-        <Divider
-          orientation="horizontal"
-          color={"red"}
-          ml={3}
-          borderWidth="1px"
-        />
-      </Flex>
+      {!isError && !isLoading && (
+        <Flex
+          mt={6}
+          width={{ base: "200px", md: "350px", lg: "400px" }}
+          alignItems={"center"}
+        >
+          <Divider orientation="horizontal" mr={3} borderWidth="1px" />
+          <Image
+            src={pokeballHeartActive}
+            cursor={"pointer"}
+            mt={5}
+            transition={"0.3s"}
+            _hover={{ transform: "scale(1.2)" }}
+            width={"30px"}
+            onClick={() => setCardsToShow(cardsToShow + 8)}
+            pb={4}
+          ></Image>
+          <Divider
+            orientation="horizontal"
+            color={"red"}
+            ml={3}
+            borderWidth="1px"
+          />
+        </Flex>
+      )}
     </VStack>
   );
 };

@@ -1,26 +1,19 @@
 import { useState } from "react";
 
-import {
-  Image,
-  Heading,
-  Flex,
-  Text,
-  Grid,
-  textDecoration,
-} from "@chakra-ui/react";
+import { Image, Heading, Flex, Text, Grid } from "@chakra-ui/react";
 
-import collectionEmpty from "../assets/collectionEmpty.png";
-import releaseAll from "../assets/releaseAll.png";
-import pokeball from "../assets/pokeball.gif";
+import collectionEmpty from "../../assets/collectionEmpty.png";
+import releaseAll from "../../assets/releaseAll.png";
+import pokeball from "../../assets/pokeball.gif";
 
-import { useAppSelector, useAppDispatch } from "../hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks";
 
 import { useNavigate } from "react-router-dom";
 
-import PokemonFavoriteCard from "./PokemonFavoriteCard";
+import PokemonFavoriteCard from "../cards/PokemonFavoriteCard";
 
-import { getFavoritesSelector } from "../store/slices/favoritesSlice";
-import { clearFavorites } from "../store/slices/favoritesSlice";
+import { getFavoritesSelector } from "../../store/slices/favoritesSlice";
+import { clearFavorites } from "../../store/slices/favoritesSlice";
 
 const PokemonFavoriteCardsList = () => {
   const favorites = useAppSelector(getFavoritesSelector);

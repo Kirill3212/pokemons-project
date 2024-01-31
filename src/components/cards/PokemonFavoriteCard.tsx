@@ -2,13 +2,17 @@ import { GridItem, Image, Heading, Button, Box } from "@chakra-ui/react";
 import { IoMdCloseCircle } from "react-icons/io";
 
 import { useNavigate } from "react-router";
-import { useAppDispatch } from "../hooks";
-import { deleteFromFavorites } from "../store/slices/favoritesSlice";
+import { useAppDispatch } from "../../hooks";
+import { deleteFromFavorites } from "../../store/slices/favoritesSlice";
+import { SinglePokemonData } from "../../types/pokemonData";
 
-const PokemonFavoriteCard = ({ pokemon }) => {
+interface PokemonFavoriteCardProps {
+  pokemon: SinglePokemonData;
+}
+
+const PokemonFavoriteCard = ({ pokemon }: PokemonFavoriteCardProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
   const dataToPass = {
     data: pokemon,
     invokePage: "Favorites",

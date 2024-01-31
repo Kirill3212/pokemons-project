@@ -1,14 +1,16 @@
 import { createListenerMiddleware } from "@reduxjs/toolkit";
+
 import { localStorageHelpers } from '../utils/localStorageHelpers';
 
 import { setFavorites, addToFavorites, deleteFromFavorites, clearFavorites } from "./slices/favoritesSlice";
-import { setHistory } from './slices/historySlice'
+import { setHistory, updateHistory, clearHistory } from './slices/historySlice'
 import { logIn } from "./slices/userSlice";
 
 import { init } from "./actions/init";
 
 const localStorageListenerMiddleware = createListenerMiddleware()
 
+// INIT
 localStorageListenerMiddleware.startListening({
     actionCreator: init,
 
@@ -24,6 +26,7 @@ localStorageListenerMiddleware.startListening({
     }
 })
 
+// LOGIN
 localStorageListenerMiddleware.startListening({
     actionCreator: logIn,
 
@@ -33,6 +36,7 @@ localStorageListenerMiddleware.startListening({
     }
 })
 
+// FAVORITES
 localStorageListenerMiddleware.startListening({
     actionCreator: addToFavorites,
 
@@ -62,6 +66,29 @@ localStorageListenerMiddleware.startListening({
         const email = localStorageHelpers.getAuth()
         if(email){
             localStorageHelpers.clearFavorites(email)
+        }
+    }
+})
+
+// HISTORY
+localStorageListenerMiddleware.startListening({
+    actionCreator: updateHistory,
+
+    effect: (action) => {
+        const email = localStorageHelpers.getAuth()
+        if(email){
+            localStorageHelpers.updateHistory(email, action.payload)
+        }
+    }
+})
+
+localStorageListenerMiddleware.startListening({
+    actionCreator: clearHistory,
+
+    effect: () => {
+        const email = localStorageHelpers.getAuth()
+        if(email){
+            localStorageHelpers.clearHistory(email)
         }
     }
 })
