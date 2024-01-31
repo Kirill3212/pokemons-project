@@ -6,8 +6,11 @@ import {
   Button,
   InputGroup,
   InputRightElement,
+  Text,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+
+import { useNavigate } from "react-router-dom";
 
 import useSignUp from "../../hooks/useSignUp";
 
@@ -19,6 +22,7 @@ const SignUpForm = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const { loading, handleSignUp } = useSignUp();
+  const navigate = useNavigate();
 
   return (
     <form style={{ width: "300px" }}>
@@ -72,6 +76,18 @@ const SignUpForm = () => {
         >
           Sign up
         </Button>
+        <Text mt={2}>
+          Already have an account ?
+          <Text
+            as={"span"}
+            color={"#F6C52E"}
+            ml={2}
+            cursor={"pointer"}
+            onClick={() => navigate("/SignIn")}
+          >
+            Sign in
+          </Text>
+        </Text>
       </VStack>
     </form>
   );

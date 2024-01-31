@@ -1,22 +1,19 @@
-import UserNavbar from "./navbar/UserNavbar";
+import { Flex, Image, IconButton } from "@chakra-ui/react";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import logo from "../assets/logo.png";
+
 import GuestNavbar from "./navbar/GuestNavbar";
+import UserNavbar from "./navbar/UserNavbar";
 
 import { Link } from "react-router-dom";
 
-import logo from "../assets/logo.png";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Flex, Image, IconButton } from "@chakra-ui/react";
-
 import changeTheme from "../utils/changeTheme";
 
-import { useAppSelector } from "../hooks";
 import { getAuthStatusSelector } from "../store/slices/userSlice";
+import { useAppSelector } from "../hooks";
 
 const Header = () => {
   const userIn = useAppSelector(getAuthStatusSelector);
-
-  console.log("UserIn authStatus -", userIn);
-
   const { colorMode, toggleColorMode } = changeTheme();
 
   return (

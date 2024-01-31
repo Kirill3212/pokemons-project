@@ -2,6 +2,8 @@ import { SinglePokemonData } from './../types/pokemonData';
 import { User } from '../types/user'
 
 export const localStorageHelpers = {
+    
+    // USER
     setUser: (email: string, user: User): void => {
         const u = JSON.stringify(user)
         localStorage.setItem(email, u)
@@ -19,13 +21,14 @@ export const localStorageHelpers = {
 
     getAuth: (): string | null => localStorage.getItem('auth'),
 
+    // FAVORITES
     addToFavorites: (email: string, pokemonCard: SinglePokemonData) => {
         const e = localStorage.getItem(email)
         if(e){
             const parsed = JSON.parse(e)
             const notExist = parsed.favorites.every((item: SinglePokemonData) => item.id !== pokemonCard.id)
             if(notExist){
-                localStorage.setItem(email, JSON.stringify({... parsed, favorites: [... parsed.favorites, pokemonCard]}))     
+                localStorage.setItem(email, JSON.stringify({... parsed, favorites: [...parsed.favorites, pokemonCard]}))     
             }
         }
     },
@@ -41,6 +44,37 @@ export const localStorageHelpers = {
                 email,
                 JSON.stringify({...parsed, favorites: updatedFavorites})
             );
+        }
+    },
+
+    clearFavorites: (email: string) => {
+        const e = localStorage.getItem(email)
+        if(e){
+            const parsed = JSON.parse(e)
+            localStorage.setItem(
+                email,
+                JSON.stringify({...parsed, favorites: []})
+            );
+        }
+    },
+
+    // HISTORY
+    updateHistory: (email: string, history: string) => {
+        const e = localStorage.getItem(email)
+        if(e){
+            const parsed = JSON.parse(e)
+            const notExist = parsed.history.every((item: string) => item !== history)
+             if(notExist){
+                localStorage.setItem(email, JSON.stringify({...parsed, history: [...parsed.history, history]}))
+            }
+        }
+    },
+
+    clearHistory: (email: string) => {
+        const e = localStorage.getItem(email)
+        if(e){
+            const parsed = JSON.parse(e)
+            localStorage.setItem(email, JSON.stringify({...parsed, history: []}))
         }
     }
 }

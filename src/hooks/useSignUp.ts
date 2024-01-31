@@ -7,7 +7,12 @@ import useShowToast from "./useShowToast";
 
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "./index";
+
+import { localStorageHelpers } from "../utils/localStorageHelpers";
+
 import { logIn } from "../store/slices/userSlice";
+import { setFavorites } from "../store/slices/favoritesSlice";
+import { setHistory } from "../store/slices/historySlice";
 
 type SignUpInputs = {
     email:string, 
@@ -48,7 +53,12 @@ const useSignUp = () => {
     }else if(password !== confirmPassword){
       setLoading(false)
       toast('Error', 'Passwords should be the same', 'error')
-    }else {
+    }
+    else if(localStorageHelpers.getUser(email)){
+      setLoading(false)
+      toast('Error', 'User already exists', 'error')
+    }
+    else {
       navigate('/')
       setLoading(false)
       toast('Success', 'Sign up successfully', 'success');
@@ -58,7 +68,9 @@ const useSignUp = () => {
           favorites: [],
           history: [],
         };
-      dispatch(logIn(user)); 
+      dispatch(logIn(user));
+      dispatch(setFavorites(user?.favorites))
+      dispatch(setHistory(user?.history)) 
     }
 }, 800)
 }

@@ -5,8 +5,12 @@ import { localStorageHelpers } from "../utils/localStorageHelpers";
 import useShowToast from "./useShowToast";
 
 import { useNavigate } from "react-router-dom";
+
 import { useAppDispatch } from "./index";
+
 import { logIn } from "../store/slices/userSlice";
+import { setFavorites } from "../store/slices/favoritesSlice";
+import { setHistory } from "../store/slices/historySlice";
 
 type SignInInputs = {
     email:string, 
@@ -32,6 +36,8 @@ const useSignIn = () => {
       navigate('/')
       setLoading(false)
       dispatch(logIn(user))
+      dispatch(setFavorites(user?.favorites))
+      dispatch(setHistory(user?.history)) 
       toast('Success', 'Log in successfully', 'success');
     }
 }, 800)

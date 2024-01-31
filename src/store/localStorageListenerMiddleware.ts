@@ -1,29 +1,32 @@
 import { createListenerMiddleware } from "@reduxjs/toolkit";
+
 import { localStorageHelpers } from '../utils/localStorageHelpers';
 
-import { setFavorites, addToFavorites, deleteFromFavorites } from "./slices/favoritesSlice";
+import { setFavorites, addToFavorites, deleteFromFavorites, clearFavorites } from "./slices/favoritesSlice";
+import { setHistory, updateHistory, clearHistory } from './slices/historySlice'
 import { logIn } from "./slices/userSlice";
 
 import { init } from "./actions/init";
 
 const localStorageListenerMiddleware = createListenerMiddleware()
 
+// INIT
 localStorageListenerMiddleware.startListening({
     actionCreator: init,
 
     effect: (action, listenerApi) => {
-        // Action doest not fire on reload
-        console.log('fire action')
         action.payload = undefined;
         const email = localStorageHelpers.getAuth();
         if(email){
             const user = localStorageHelpers.getUser(email);
             listenerApi.dispatch(logIn(user))
             listenerApi.dispatch(setFavorites(user?.favorites))
+            listenerApi.dispatch(setHistory(user?.history))
         }
     }
 })
 
+// LOGIN
 localStorageListenerMiddleware.startListening({
     actionCreator: logIn,
 
@@ -33,6 +36,7 @@ localStorageListenerMiddleware.startListening({
     }
 })
 
+// FAVORITES
 localStorageListenerMiddleware.startListening({
     actionCreator: addToFavorites,
 
@@ -55,4 +59,39 @@ localStorageListenerMiddleware.startListening({
     }
 })
 
+localStorageListenerMiddleware.startListening({
+    actionCreator: clearFavorites,
+
+    effect: () => {
+        const email = localStorageHelpers.getAuth()
+        if(email){
+            localStorageHelpers.clearFavorites(email)
+        }
+    }
+})
+
+// HISTORY
+localStorageListenerMiddleware.startListening({
+    actionCreator: updateHistory,
+
+    effect: (action) => {
+        const email = localStorageHelpers.getAuth()
+        if(email){
+            localStorageHelpers.updateHistory(email, action.payload)
+        }
+    }
+})
+
+localStorageListenerMiddleware.startListening({
+    actionCreator: clearHistory,
+
+    effect: () => {
+        const email = localStorageHelpers.getAuth()
+        if(email){
+            localStorageHelpers.clearHistory(email)
+        }
+    }
+})
+
 export { localStorageListenerMiddleware }
+

@@ -1,6 +1,6 @@
 import { Flex, Image, Heading } from "@chakra-ui/react";
 import favoriteCollection from "../assets/favoriteCollection.png";
-import PokemonFavoriteCardsList from "../components/PokemonFavoriteCardsList";
+import PokemonFavoriteCardsList from "../components/cardsLists/PokemonFavoriteCardsList";
 
 const Favorites = () => {
   return (

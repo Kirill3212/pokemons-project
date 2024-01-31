@@ -12,7 +12,7 @@ const initialState: InitialState = {
     email: '',
 };
 
-export const userSlice = createSlice({
+export const user = createSlice({
   name: NameSpace.User,
   initialState,
   reducers: {
@@ -29,5 +29,5 @@ export const userSlice = createSlice({
 export const getAuthStatusSelector = (state: State) => state[NameSpace.User].authorizationStatus;
 export const getEmailSelector = (state: State) => state[NameSpace.User].email;
 
-export const { logIn, logOut } = userSlice.actions
+export const { logIn, logOut } = user.actions
 
