@@ -28,9 +28,7 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
   const navigate = useNavigate();
   const toast = useShowToast();
 
-  const mainImage = pokemon?.sprites.other.dream_world.front_default;
-  const backupImage = pokemon?.sprites.front_default;
-
+  // Data to SinglePage
   const dataToPass = {
     data: pokemon,
     invokePage: "Search",
@@ -52,7 +50,7 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
       display={{ base: "column", md: "flex", lg: "flex" }}
     >
       <Image
-        src={mainImage ? mainImage : backupImage}
+        src={pokemon.mainImage ? pokemon.mainImage : pokemon.backupImage}
         boxSize={{ base: "150px", md: "150px", lg: "180px" }}
         maxWidth={"170px"}
         backgroundImage={
@@ -80,7 +78,7 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
             color={"#F6C52E"}
             ml={2}
           >
-            {pokemon?.name}
+            {pokemon.name}
           </Heading>
           {isLiked ? (
             <Image
@@ -104,19 +102,19 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
           <Text fontWeight={500} color={"#6F45B9"}>
             Experience:
           </Text>
-          <Text ml={2}>{pokemon?.base_experience}</Text>
+          <Text ml={2}>{pokemon.experience}</Text>
         </Flex>
         <Flex>
           <Text fontWeight={500} color={"#24B6C8"}>
             Height:
           </Text>
-          <Text ml={2}>{pokemon?.height}</Text>
+          <Text ml={2}>{pokemon.height}</Text>
         </Flex>
         <Flex>
           <Text fontWeight={500} color={"#DE843A"}>
             Weight:
           </Text>
-          <Text ml={2}>{pokemon?.weight}</Text>
+          <Text ml={2}>{pokemon.weight}</Text>
         </Flex>
         <Button
           mt={{ base: 3, md: 0, lg: 0 }}

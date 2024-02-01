@@ -25,7 +25,7 @@ const PokemonCardsList = () => {
     isLoading,
     isError,
   } = useGetPokemonsQuery(cardsToShow);
-
+  console.log(pokemons);
   return (
     <VStack>
       <Grid
@@ -68,7 +68,7 @@ const PokemonCardsList = () => {
 
         {pokemons?.results &&
           pokemons.results.map((pokemon: SinglePokemonResponse) => (
-            <PokemonCard key={pokemon.name} pokemon={pokemon} />
+            <PokemonCard key={pokemon.name} pokemonData={pokemon} />
           ))}
       </Grid>
       {!isError && !isLoading && (

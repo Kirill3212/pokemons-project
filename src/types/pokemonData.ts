@@ -3,7 +3,7 @@ export interface SinglePokemonResponse {
     url: string
 }
 
-export interface SinglePokemonData {
+export interface SinglePokemonCardResponse {
     abilities: [],
     base_experience: number,
     forms: [],
@@ -23,6 +23,21 @@ export interface SinglePokemonData {
     stats: [],
     types: [],
     weight: number
+}
+
+export interface SinglePokemonData {
+    id: number
+    attacks: [],
+    experience: number,
+    height: number,
+    weight: number,
+    moves: [],
+    name: string,
+    type: string,
+    // Images
+    mainImage: string,
+    backupImage: string,
+    animatedImage: string,
 }
 
 // Sprites

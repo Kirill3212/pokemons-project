@@ -27,17 +27,9 @@ const SingleCard = () => {
   const { isLiked, checkIfIsLiked, handleAddToFavorites } =
     useCheckIfIsLikedAndAddToFavorites();
 
+  // Data of Pokemon Sender (PokemonCard, PokemonCardSearch, PokemonFavoriteCard)
   const pokemon = location.state.data;
   const invokedPage = location.state.invokePage;
-  const mainImage = pokemon?.sprites.other.showdown.front_default;
-  const backupImage = pokemon?.sprites.front_default;
-  const attacks = pokemon?.moves.map((move: string) => move.move.name);
-
-  const pokemonName = pokemon?.name;
-  const pokemonType = pokemon?.types[0].type.name;
-  const pokemonExperience = pokemon?.base_experience;
-  const pokemonHeight = pokemon?.height;
-  const pokemonWeight = pokemon?.weight;
 
   useEffect(() => {
     if (isAuthorized) {
@@ -55,14 +47,14 @@ const SingleCard = () => {
   // Slider of Attacks
   const changeAttackForwards = () => {
     let next = attackPosition;
-    if (next >= attacks.length - 1) {
+    if (next >= pokemon.attacks.length - 1) {
       setAttackPosition(0);
     } else setAttackPosition(next + 1);
   };
   const changeAttackBackwards = () => {
     let prev = attackPosition;
     if (prev <= 0) {
-      setAttackPosition(attacks.length - 1);
+      setAttackPosition(pokemon.attacks.length - 1);
     } else setAttackPosition(prev - 1);
   };
 
@@ -135,7 +127,7 @@ const SingleCard = () => {
               color={"#F6C52E"}
               ml={2}
             >
-              {pokemonName}
+              {pokemon.name}
             </Heading>
             <Flex
               gap={3}
@@ -175,10 +167,15 @@ const SingleCard = () => {
             alignItems={"center"}
           >
             <Image
-              src={mainImage ? mainImage : backupImage}
+              src={
+                pokemon.animatedImage
+                  ? pokemon.animatedImage
+                  : pokemon.mainImage && pokemon.backupImage
+              }
               width={{ base: "50%", md: "50%", lg: "55%" }}
               height={{ base: "50%", md: "50%", lg: "55%" }}
               borderRadius={8}
+              alt={pokemon.name}
             ></Image>
           </Flex>
         </VStack>
@@ -193,25 +190,25 @@ const SingleCard = () => {
               <Text fontWeight={500} color={"#83C785"}>
                 Type:
               </Text>
-              <Text ml={2}>{pokemonType}</Text>
+              <Text ml={2}>{pokemon.type}</Text>
             </Flex>
             <Flex>
               <Text fontWeight={500} color={"#6F45B9"}>
                 Experience:
               </Text>
-              <Text ml={2}>{pokemonExperience}</Text>
+              <Text ml={2}>{pokemon.experience}</Text>
             </Flex>
             <Flex>
               <Text color={"#24B6C8"} fontWeight={500}>
                 Height:
               </Text>
-              <Text ml={2}>{pokemonHeight}</Text>
+              <Text ml={2}>{pokemon.height}</Text>
             </Flex>
             <Flex>
               <Text color={"#DE843A"} fontWeight={500}>
                 Weight:
               </Text>
-              <Text ml={2}>{pokemonWeight}</Text>
+              <Text ml={2}>{pokemon.weight}</Text>
             </Flex>
           </VStack>
 
@@ -240,7 +237,7 @@ const SingleCard = () => {
                 onClick={changeAttackBackwards}
               />
               <Text pb={1} userSelect={"none"} color={"red.300"}>
-                {attacks[attackPosition]}
+                {pokemon.attacks[attackPosition]}
               </Text>
               <ArrowRightIcon
                 cursor={"pointer"}

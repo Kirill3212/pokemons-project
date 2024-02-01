@@ -11,13 +11,12 @@ import {
   Text,
   Image,
   Tooltip,
-  useQuery,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { TbBulb } from "react-icons/tb";
 import loadingSearch from "../assets/loadingSearch.gif";
 
-import { useGetPokemonByNameQuery } from "../api/api";
+import { useGetPokemonByNameOrIdQuery } from "../api/api";
 
 import { updateHistory } from "../store/slices/historySlice";
 import { useAppDispatch } from "../hooks";
@@ -41,7 +40,7 @@ const SearchBarAndDisplay = ({ homeInputSearch }) => {
   const debouncedSearchInput = useDebounce(searchInput, 500);
   const dispatch = useAppDispatch();
 
-  const { data, isError, isLoading } = useGetPokemonByNameQuery(
+  const { data, isError, isLoading } = useGetPokemonByNameOrIdQuery(
     debouncedSearchInput || null
   );
 

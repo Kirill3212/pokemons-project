@@ -14,9 +14,7 @@ const PokemonFavoriteCard = ({ pokemon }: PokemonFavoriteCardProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const mainImage = pokemon?.sprites.other.dream_world.front_default;
-  const backupImage = pokemon?.sprites.front_default;
-
+  // Data to SinglePage
   const dataToPass = {
     data: pokemon,
     invokePage: "Favorites",
@@ -41,7 +39,7 @@ const PokemonFavoriteCard = ({ pokemon }: PokemonFavoriteCardProps) => {
         <IoMdCloseCircle color="red" size={"18px"} />
       </Box>
       <Image
-        src={mainImage ? mainImage : backupImage}
+        src={pokemon.mainImage ? pokemon.mainImage : pokemon.backupImage}
         boxSize="150px"
         backgroundImage={
           "linear-gradient(to bottom, #ffffff, #ffecff, #ffd3da, #ffd27d, #f8ef09)"

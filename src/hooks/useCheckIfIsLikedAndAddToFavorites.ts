@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useShowToast } from "./useShowToast";
 import { SinglePokemonData } from "../types/pokemonData";
 import { useAppSelector, useAppDispatch } from ".";
 import { getFavoritesSelector } from "../store/slices/favoritesSlice";
@@ -13,6 +14,7 @@ import {
     const isAuthorized = useAppSelector(getAuthStatusSelector);
     const favoritePokemons = useAppSelector(getFavoritesSelector);
     const dispatch = useAppDispatch()
+    const toast = useShowToast()
 
     const checkIfIsLiked = (pokemon: SinglePokemonData | undefined) => {
       const res = favoritePokemons.some(
@@ -29,7 +31,7 @@ import {
       isLiked
         ? dispatch(deleteFromFavorites(pokemon?.id))
         : dispatch(addToFavorites(pokemon));
-    }
+    }else toast("Sorry :(", "Need to sign in", "error")
     }
 
     return {isLiked, checkIfIsLiked, handleAddToFavorites}

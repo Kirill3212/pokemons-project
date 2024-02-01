@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { localStorageHelpers } from "../utils/localStorageHelpers";
 
-import useShowToast from "./useShowToast";
+import { useShowToast } from "./useShowToast";
 
 import { useNavigate } from "react-router-dom";
 
