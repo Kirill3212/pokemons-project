@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { Image, Heading, Button, Flex, Text } from "@chakra-ui/react";
 
@@ -9,26 +9,22 @@ import pokeballHeartNotActive from "../../assets/pokeballHeartNotActive.png";
 
 import { SinglePokemonData } from "../../types/pokemonData";
 
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppSelector } from "../../hooks";
 
-import useShowToast from "../../hooks/useShowToast";
+import { useShowToast } from "../../hooks/useShowToast";
 
-import { getFavoritesSelector } from "../../store/slices/favoritesSlice";
+import { useCheckIfIsLikedAndAddToFavorites } from "../../hooks/useCheckIfIsLikedAndAddToFavorites";
+
 import { getAuthStatusSelector } from "../../store/slices/userSlice";
-import {
-  addToFavorites,
-  deleteFromFavorites,
-} from "../../store/slices/favoritesSlice";
 
 interface PokemonCardSearchProps {
   pokemon: SinglePokemonData;
 }
 
 const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
-  const [isLiked, setIsLiked] = useState(false);
-  const favPokemons = useAppSelector(getFavoritesSelector);
   const isAuthorized = useAppSelector(getAuthStatusSelector);
-  const dispatch = useAppDispatch();
+  const { isLiked, checkIfIsLiked, handleAddToFavorites } =
+    useCheckIfIsLikedAndAddToFavorites();
   const navigate = useNavigate();
   const toast = useShowToast();
 
@@ -45,22 +41,6 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
       checkIfIsLiked(pokemon);
     }
   });
-
-  const checkIfIsLiked = (pokemon: SinglePokemonData) => {
-    const pokemonIsLiked = favPokemons.some((pok) => pok.id == pokemon?.id);
-    if (pokemonIsLiked) {
-      setIsLiked(true);
-    } else setIsLiked(false);
-  };
-
-  const handleAddToFavorites = () => {
-    if (isAuthorized) {
-      setIsLiked(!isLiked);
-      isLiked
-        ? dispatch(deleteFromFavorites(pokemon?.id))
-        : dispatch(addToFavorites(pokemon));
-    } else toast("Sorry :(", "Need to sign in", "error");
-  };
 
   return (
     <Flex
@@ -107,7 +87,7 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
               cursor={"pointer"}
               width={"23px"}
               src={pokeballHeartActive}
-              onClick={() => handleAddToFavorites()}
+              onClick={() => handleAddToFavorites(pokemon)}
             />
           ) : (
             <Image
@@ -116,7 +96,7 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
               src={pokeballHeartNotActive}
               bg={"yellow.300"}
               borderRadius={"50%"}
-              onClick={() => handleAddToFavorites()}
+              onClick={() => handleAddToFavorites(pokemon)}
             />
           )}
         </Flex>

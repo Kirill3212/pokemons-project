@@ -12,26 +12,20 @@ import pokeballHeartNotActive from "../assets/pokeballHeartNotActive.png";
 import meowText from "../assets/meowText.png";
 import loadingSearch from "../assets/loadingSearch.gif";
 
-import { SinglePokemonData } from "../types/pokemonData";
+import { useAppSelector } from "../hooks";
 
-import { useAppDispatch, useAppSelector } from "../hooks";
-
-import {
-  addToFavorites,
-  deleteFromFavorites,
-} from "../store/slices/favoritesSlice";
-import { getFavoritesSelector } from "../store/slices/favoritesSlice";
 import { getAuthStatusSelector } from "../store/slices/userSlice";
 
+import { useCheckIfIsLikedAndAddToFavorites } from "../hooks/useCheckIfIsLikedAndAddToFavorites";
+
 const SingleCard = () => {
-  const [isLiked, setIsLiked] = useState(false);
   const [attackPosition, setAttackPosition] = useState(0);
   const [meow, setMeow] = useState(false);
   const location = useLocation();
-  const favoritePokemons = useAppSelector(getFavoritesSelector);
   const isAuthorized = useAppSelector(getAuthStatusSelector);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { isLiked, checkIfIsLiked, handleAddToFavorites } =
+    useCheckIfIsLikedAndAddToFavorites();
 
   const pokemon = location.state.data;
   const invokedPage = location.state.invokePage;
@@ -50,24 +44,6 @@ const SingleCard = () => {
       checkIfIsLiked(pokemon);
     }
   });
-
-  const checkIfIsLiked = (pokemon: SinglePokemonData) => {
-    const pokemonIsLiked = favoritePokemons.some(
-      (pok) => pok.id == pokemon?.id
-    );
-    if (pokemonIsLiked) {
-      setIsLiked(true);
-    } else setIsLiked(false);
-  };
-
-  const handleAddToFavorites = () => {
-    if (isAuthorized) {
-      setIsLiked(!isLiked);
-      isLiked
-        ? dispatch(deleteFromFavorites(pokemon?.id))
-        : dispatch(addToFavorites(pokemon));
-    } else navigate("/SignUp");
-  };
 
   const showMeow = () => {
     setMeow(true);
@@ -173,7 +149,7 @@ const SingleCard = () => {
                   cursor={"pointer"}
                   width={"23px"}
                   src={pokeballHeartActive}
-                  onClick={() => handleAddToFavorites()}
+                  onClick={() => handleAddToFavorites(pokemon)}
                 />
               ) : (
                 <Image
@@ -182,7 +158,7 @@ const SingleCard = () => {
                   src={pokeballHeartNotActive}
                   bg={"yellow.300"}
                   borderRadius={"50%"}
-                  onClick={() => handleAddToFavorites()}
+                  onClick={() => handleAddToFavorites(pokemon)}
                 />
               )}
             </Flex>

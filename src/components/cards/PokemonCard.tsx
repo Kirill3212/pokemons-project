@@ -10,15 +10,12 @@ import pokeballHeartNotActive from "../../assets/pokeballHeartNotActive.png";
 import { SinglePokemonResponse } from "../../types/pokemonData";
 import { SinglePokemonData } from "../../types/pokemonData";
 
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppSelector } from "../../hooks";
 
-import useShowToast from "../../hooks/useShowToast";
+import { useShowToast } from "../../hooks/useShowToast";
 
-import {
-  addToFavorites,
-  deleteFromFavorites,
-} from "../../store/slices/favoritesSlice";
-import { getFavoritesSelector } from "../../store/slices/favoritesSlice";
+import { useCheckIfIsLikedAndAddToFavorites } from "../../hooks/useCheckIfIsLikedAndAddToFavorites";
+
 import { getAuthStatusSelector } from "../../store/slices/userSlice";
 
 interface PokemonCardProps {
@@ -27,12 +24,11 @@ interface PokemonCardProps {
 
 const PokemonCard = ({ pokemon }: PokemonCardProps) => {
   const [pokemonData, setPokemonData] = useState<SinglePokemonData>();
-  const [isLiked, setIsLiked] = useState(false);
-  const favoritePokemons = useAppSelector(getFavoritesSelector);
   const isAuthorized = useAppSelector(getAuthStatusSelector);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const toast = useShowToast();
+  const { isLiked, checkIfIsLiked, handleAddToFavorites } =
+    useCheckIfIsLikedAndAddToFavorites();
 
   const mainImage = pokemonData?.sprites.other.dream_world.front_default;
   const backupImage = pokemonData?.sprites.front_default;
@@ -50,24 +46,6 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
         if (isAuthorized) checkIfIsLiked(res);
       });
   }, []);
-
-  const checkIfIsLiked = (res: SinglePokemonData) => {
-    const pokemonIsLiked = favoritePokemons.some(
-      (pokemon) => pokemon.id == res.id
-    );
-    if (pokemonIsLiked) {
-      setIsLiked(true);
-    }
-  };
-
-  const handleAddToFavorites = () => {
-    if (isAuthorized) {
-      setIsLiked(!isLiked);
-      isLiked
-        ? dispatch(deleteFromFavorites(pokemonData?.id))
-        : dispatch(addToFavorites(pokemonData));
-    } else toast("Sorry :(", "Need to sign in", "error");
-  };
 
   return (
     <GridItem
@@ -99,7 +77,7 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
             cursor={"pointer"}
             width={"20px"}
             src={pokeballHeartActive}
-            onClick={() => handleAddToFavorites()}
+            onClick={() => handleAddToFavorites(pokemonData)}
           />
         ) : (
           <Image
@@ -108,7 +86,7 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
             src={pokeballHeartNotActive}
             bg={"yellow.300"}
             borderRadius={"50%"}
-            onClick={() => handleAddToFavorites()}
+            onClick={() => handleAddToFavorites(pokemonData)}
           />
         )}
       </Flex>

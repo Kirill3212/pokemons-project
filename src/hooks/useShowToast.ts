@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useToast } from "@chakra-ui/react";
 
-const useShowToast = () => {
+export const useShowToast = () => {
   const toast = useToast();
 
   const showToast = useCallback(
@@ -20,4 +20,3 @@ const useShowToast = () => {
   return showToast;
 };
 
-export default useShowToast;
