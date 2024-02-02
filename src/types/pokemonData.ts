@@ -3,7 +3,7 @@ export interface SinglePokemonResponse {
     url: string
 }
 
-export interface SinglePokemonData {
+export interface SinglePokemonCardResponse {
     abilities: [],
     base_experience: number,
     forms: [],
@@ -25,6 +25,20 @@ export interface SinglePokemonData {
     weight: number
 }
 
+export interface SinglePokemonData {
+    id: number
+    attacks: [],
+    experience: number,
+    height: number,
+    weight: number,
+    name: string,
+    type: string,
+    // Images
+    mainImage: string,
+    backupImage: string,
+    animatedImage: string,
+}
+
 // Sprites
 export type TSprites = {
     back_default: string,
@@ -38,9 +52,13 @@ export type TSprites = {
     other: TSpritesInner,
 }
 export type TSpritesInner = {
-    dream_world: TSpriresDreamWorld
+    dream_world: TSpriresDreamWorld,
+    showdown: TSpriresShowDown,
 }
 export type TSpriresDreamWorld = {
     front_default: string,
     front_female: string,
+}
+export type TSpriresShowDown = {
+    front_default: string,
 }

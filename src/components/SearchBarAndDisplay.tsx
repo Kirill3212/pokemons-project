@@ -11,13 +11,12 @@ import {
   Text,
   Image,
   Tooltip,
-  useQuery,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { TbBulb } from "react-icons/tb";
 import loadingSearch from "../assets/loadingSearch.gif";
 
-import { useGetPokemonByNameQuery } from "../api/api";
+import { useGetPokemonByNameOrIdQuery } from "../api/api";
 
 import { updateHistory } from "../store/slices/historySlice";
 import { useAppDispatch } from "../hooks";
@@ -27,29 +26,31 @@ import { useDebounce } from "../hooks/useDebounce";
 import SearchPageSuggestions from "./SearchPageSuggestions";
 import PokemonCardSearch from "./cards/PokemonCardSearch";
 
-// interface SearchBarProps {
-//   hash: string;
-//   key: string;
-//   pathname: string;
-//   search: string;
-//   state: string;
-// }
+interface SearchBarProps {
+  homeInputSearch: {
+    hash: string;
+    key: string;
+    pathname: string;
+    search: string;
+    state: string;
+  };
+}
 
-const SearchBarAndDisplay = ({ homeInputSearch }) => {
-  // console.log(homeInputSearch);
+const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
   const [searchInput, setSearchInput] = useState(homeInputSearch.state);
   const debouncedSearchInput = useDebounce(searchInput, 500);
   const dispatch = useAppDispatch();
 
-  const { data, isError, isLoading } = useGetPokemonByNameQuery(
-    debouncedSearchInput || null
-  );
+  const {
+    data: pokemon,
+    isError,
+    isLoading,
+  } = useGetPokemonByNameOrIdQuery(debouncedSearchInput || null);
 
-  const handleSearch = (e: any) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchInput(searchInput);
-
-    if (!isError && !isLoading && data) {
+    if (!isError && !isLoading && pokemon) {
       dispatch(updateHistory(searchInput));
     }
   };
@@ -94,10 +95,10 @@ const SearchBarAndDisplay = ({ homeInputSearch }) => {
       <VStack>
         {isError && <SearchPageSuggestions />}
         {isLoading && <Image src={loadingSearch} mt={"40px"} width={"150px"} />}
-        {data && !isError && !isLoading && (
+        {pokemon && !isError && !isLoading && (
           <Grid mt={8}>
             <GridItem>
-              <PokemonCardSearch pokemon={data} />
+              <PokemonCardSearch pokemon={pokemon} />
             </GridItem>
           </Grid>
         )}

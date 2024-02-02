@@ -37,7 +37,7 @@ const History = () => {
     }, 2000);
   };
 
-  console.log(history);
+  // console.log(history);
   return (
     <Flex flexDirection={"column"} width={"100%"} alignItems={"center"}>
       {/* Header */}
@@ -82,7 +82,11 @@ const History = () => {
         {/* History */}
         {history.length ? (
           <VStack>
-            <Flex flexDirection={{ base: "column", md: "row", lg: "row" }}>
+            <Flex
+              flexDirection={{ base: "column", md: "row", lg: "row" }}
+              flexWrap={"wrap"}
+              maxW={"600px"}
+            >
               {history.map((item, index) => (
                 <Text key={index} ml={2} mr={2} cursor={"pointer"}>
                   {item}

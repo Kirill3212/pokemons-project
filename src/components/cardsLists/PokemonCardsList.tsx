@@ -66,11 +66,12 @@ const PokemonCardsList = () => {
           </Flex>
         )}
 
-        {pokemons?.results &&
+        {pokemons &&
           pokemons.results.map((pokemon: SinglePokemonResponse) => (
-            <PokemonCard key={pokemon.name} pokemon={pokemon} />
+            <PokemonCard key={pokemon.name} pokemonData={pokemon} />
           ))}
       </Grid>
+
       {!isError && !isLoading && (
         <Flex
           mt={6}

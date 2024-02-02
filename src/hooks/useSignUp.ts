@@ -3,10 +3,10 @@ import { useState } from "react";
 import { validateEmail } from "../utils/validateEmail";
 import { validatePassword } from "../utils/validatePassword";
 
-import useShowToast from "./useShowToast";
+import { useShowToast } from "./useShowToast";
 
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "./index";
+import { useAppDispatch } from ".";
 
 import { localStorageHelpers } from "../utils/localStorageHelpers";
 
@@ -20,7 +20,7 @@ type SignUpInputs = {
     confirmPassword:string
 }
 
-const useSignUp = () => {
+export const useSignUp = () => {
   const [loading, setLoading] = useState(false)
   const dispatch = useAppDispatch()
   const toast = useShowToast()

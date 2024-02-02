@@ -1,36 +1,7 @@
-import {
-  RouterProvider,
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-} from "react-router-dom";
-
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routing/router";
 import { init } from "./store/actions/init";
-import { useAppDispatch } from "./hooks/index";
-
-// Pages
-import Layout from "./components/Layout";
-import Home from "./pages/Home";
-import SingleCard from "./pages/SingleCard";
-import Favorites from "./pages/Favorites";
-import History from "./pages/History";
-import SignIn from "./pages/auth/SignIn";
-import SignUp from "./pages/auth/SignUp";
-import Search from "./pages/Search";
-
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<Layout />}>
-      <Route index element={<Home />} />
-      <Route path="SingleCard" element={<SingleCard />} />
-      <Route path="Favorites" element={<Favorites />} />
-      <Route path="History" element={<History />} />
-      <Route path="SignIn" element={<SignIn />} />
-      <Route path="SignUp" element={<SignUp />} />
-      <Route path="Search" element={<Search />} />
-    </Route>
-  )
-);
+import { useAppDispatch } from "./hooks";
 
 function App() {
   const dispatch = useAppDispatch();
