@@ -3,18 +3,16 @@ import MobileNavbar from "./MobileNavbar";
 import { Flex, Text } from "@chakra-ui/react";
 
 import { useAppDispatch } from "../../hooks";
-import { useNavigate } from "react-router-dom";
 import { logOut } from "../../store/slices/userSlice";
 import { localStorageHelpers } from "../../utils/localStorageHelpers";
 
 const UserNavbar = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorageHelpers.setAuth("");
     dispatch(logOut());
-    navigate("/");
+    window.location.reload();
   };
 
   return (
