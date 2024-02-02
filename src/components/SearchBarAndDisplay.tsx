@@ -26,16 +26,17 @@ import { useDebounce } from "../hooks/useDebounce";
 import SearchPageSuggestions from "./SearchPageSuggestions";
 import PokemonCardSearch from "./cards/PokemonCardSearch";
 
-// interface SearchBarProps {
-//   hash: string;
-//   key: string;
-//   pathname: string;
-//   search: string;
-//   state: string;
-// }
+interface SearchBarProps {
+  homeInputSearch: {
+    hash: string;
+    key: string;
+    pathname: string;
+    search: string;
+    state: string;
+  };
+}
 
-const SearchBarAndDisplay = ({ homeInputSearch }) => {
-  // console.log(homeInputSearch);
+const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
   const [searchInput, setSearchInput] = useState(homeInputSearch.state);
   const debouncedSearchInput = useDebounce(searchInput, 500);
   const dispatch = useAppDispatch();
@@ -44,10 +45,9 @@ const SearchBarAndDisplay = ({ homeInputSearch }) => {
     debouncedSearchInput || null
   );
 
-  const handleSearch = (e: any) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchInput(searchInput);
-
     if (!isError && !isLoading && data) {
       dispatch(updateHistory(searchInput));
     }

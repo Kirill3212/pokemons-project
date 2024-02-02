@@ -28,7 +28,7 @@ import { useGetPokemonByNameOrIdQuery } from "../../api/api";
 
 import { getPokemonId } from "../../utils/getPokemonId";
 
-import { SinglePokemonData } from "../../types/pokemonData";
+// import { SinglePokemonData } from "../../types/pokemonData";
 
 interface PokemonCardProps {
   pokemonData: SinglePokemonResponse;
@@ -42,8 +42,7 @@ const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
     useCheckIfIsLikedAndAddToFavorites();
 
   const pokemonId = getPokemonId(pokemonData.url);
-  const { data: pokemon } =
-    useGetPokemonByNameOrIdQuery<SinglePokemonData>(pokemonId);
+  const { data: pokemon } = useGetPokemonByNameOrIdQuery(pokemonId);
 
   // console.log("PokemonCard -", pokemon);
 
