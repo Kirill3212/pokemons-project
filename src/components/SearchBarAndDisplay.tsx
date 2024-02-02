@@ -41,14 +41,16 @@ const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
   const debouncedSearchInput = useDebounce(searchInput, 500);
   const dispatch = useAppDispatch();
 
-  const { data, isError, isLoading } = useGetPokemonByNameOrIdQuery(
-    debouncedSearchInput || null
-  );
+  const {
+    data: pokemon,
+    isError,
+    isLoading,
+  } = useGetPokemonByNameOrIdQuery(debouncedSearchInput || null);
 
   const handleSearch = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchInput(searchInput);
-    if (!isError && !isLoading && data) {
+    if (!isError && !isLoading && pokemon) {
       dispatch(updateHistory(searchInput));
     }
   };
@@ -93,10 +95,10 @@ const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
       <VStack>
         {isError && <SearchPageSuggestions />}
         {isLoading && <Image src={loadingSearch} mt={"40px"} width={"150px"} />}
-        {data && !isError && !isLoading && (
+        {pokemon && !isError && !isLoading && (
           <Grid mt={8}>
             <GridItem>
-              <PokemonCardSearch pokemon={data} />
+              <PokemonCardSearch pokemon={pokemon} />
             </GridItem>
           </Grid>
         )}

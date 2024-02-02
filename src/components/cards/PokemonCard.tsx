@@ -28,8 +28,6 @@ import { useGetPokemonByNameOrIdQuery } from "../../api/api";
 
 import { getPokemonId } from "../../utils/getPokemonId";
 
-// import { SinglePokemonData } from "../../types/pokemonData";
-
 interface PokemonCardProps {
   pokemonData: SinglePokemonResponse;
 }
@@ -43,8 +41,6 @@ const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
 
   const pokemonId = getPokemonId(pokemonData.url);
   const { data: pokemon } = useGetPokemonByNameOrIdQuery(pokemonId);
-
-  // console.log("PokemonCard -", pokemon);
 
   // Data to SinglePage
   const dataToPass = {
