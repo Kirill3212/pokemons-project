@@ -5,18 +5,21 @@ import { ArrowLeftIcon } from "@chakra-ui/icons";
 import { ArrowRightIcon } from "@chakra-ui/icons";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 
+import pokeballHeartNotActive from "../../assets/pokeballHeartNotActive.png";
+import pokeballHeartActive from "../../assets/pokeballHeartActive.png";
+import loadingSearch from "../../assets/loadingSearch.gif";
+import meowText from "../../assets/meowText.png";
+
+import SingleCardImage from "./SingleCardImage";
+import SingleCardStats from "./SingleCardStats";
+
 import { useNavigate, useLocation } from "react-router-dom";
 
-import pokeballHeartActive from "../assets/pokeballHeartActive.png";
-import pokeballHeartNotActive from "../assets/pokeballHeartNotActive.png";
-import meowText from "../assets/meowText.png";
-import loadingSearch from "../assets/loadingSearch.gif";
+import { useAppSelector } from "../../hooks";
 
-import { useAppSelector } from "../hooks";
+import { getAuthStatusSelector } from "../../store/slices/userSlice";
 
-import { getAuthStatusSelector } from "../store/slices/userSlice";
-
-import { useCheckIfIsLikedAndAddToFavorites } from "../hooks/useCheckIfIsLikedAndAddToFavorites";
+import { useCheckIfIsLikedAndAddToFavorites } from "../../hooks/useCheckIfIsLikedAndAddToFavorites";
 
 const SingleCard = () => {
   const [attackPosition, setAttackPosition] = useState(0);
@@ -155,62 +158,14 @@ const SingleCard = () => {
               )}
             </Flex>
           </Flex>
-
-          {/* Image of the Pokemon */}
-          <Flex
-            borderRadius={10}
-            backgroundImage={
-              "linear-gradient(to bottom, #ffffff, #ffecff, #ffd3da, #ffd27d, #f8ef09)"
-            }
-            boxSize={{ base: "150px", md: "180px", lg: "200px" }}
-            justifyContent={"center"}
-            alignItems={"center"}
-          >
-            <Image
-              src={
-                pokemon.animatedImage
-                  ? pokemon.animatedImage
-                  : pokemon.mainImage && pokemon.backupImage
-              }
-              width={{ base: "50%", md: "50%", lg: "55%" }}
-              height={{ base: "50%", md: "50%", lg: "55%" }}
-              borderRadius={8}
-              alt={pokemon.name}
-            ></Image>
-          </Flex>
+          <SingleCardImage pokemon={pokemon} />
         </VStack>
         <Flex
           flexDirection={"column"}
           width={"200px"}
           pl={{ base: "35px", md: 0, lg: 0 }}
         >
-          {/* Stats of the Pokemon */}
-          <VStack height={"50%"} alignItems={"left"} mt={7}>
-            <Flex>
-              <Text fontWeight={500} color={"#83C785"}>
-                Type:
-              </Text>
-              <Text ml={2}>{pokemon.type[0]}</Text>
-            </Flex>
-            <Flex>
-              <Text fontWeight={500} color={"#6F45B9"}>
-                Experience:
-              </Text>
-              <Text ml={2}>{pokemon.experience}</Text>
-            </Flex>
-            <Flex>
-              <Text color={"#24B6C8"} fontWeight={500}>
-                Height:
-              </Text>
-              <Text ml={2}>{pokemon.height}</Text>
-            </Flex>
-            <Flex>
-              <Text color={"#DE843A"} fontWeight={500}>
-                Weight:
-              </Text>
-              <Text ml={2}>{pokemon.weight}</Text>
-            </Flex>
-          </VStack>
+          <SingleCardStats pokemon={pokemon} />
 
           {/*Attack Slider */}
           <VStack

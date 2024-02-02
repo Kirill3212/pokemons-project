@@ -71,6 +71,7 @@ const PokemonCardsList = () => {
             <PokemonCard key={pokemon.name} pokemonData={pokemon} />
           ))}
       </Grid>
+
       {!isError && !isLoading && (
         <Flex
           mt={6}

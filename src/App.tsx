@@ -11,7 +11,7 @@ import { useAppDispatch } from "./hooks";
 // Pages
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
-import SingleCard from "./pages/SingleCard";
+import SingleCard from "./pages/singleCard/SingleCard";
 import Favorites from "./pages/Favorites";
 import History from "./pages/History";
 import SignIn from "./pages/auth/SignIn";
