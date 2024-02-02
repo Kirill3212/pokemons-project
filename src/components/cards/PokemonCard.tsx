@@ -26,6 +26,8 @@ import { getAuthStatusSelector } from "../../store/slices/userSlice";
 
 import { useGetPokemonByNameOrIdQuery } from "../../api/api";
 
+import { getPokemonId } from "../../utils/getPokemonId";
+
 import { SinglePokemonData } from "../../types/pokemonData";
 
 interface PokemonCardProps {
@@ -39,16 +41,11 @@ const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
   const { isLiked, checkIfIsLiked, handleAddToFavorites } =
     useCheckIfIsLikedAndAddToFavorites();
 
-  // Get pokemon ID // Вынести в утилитку
-  function getPokemonId(pokemonUrl: string) {
-    const parts = pokemonUrl.split("/");
-    return parts[parts.length - 2];
-  }
+  const pokemonId = getPokemonId(pokemonData.url);
+  const { data: pokemon } =
+    useGetPokemonByNameOrIdQuery<SinglePokemonData>(pokemonId);
 
-  const pokemonUrl = pokemonData.url;
-  const pokemonId = getPokemonId(pokemonUrl);
-
-  const { data: pokemon } = useGetPokemonByNameOrIdQuery(pokemonId);
+  console.log("PokemonCard -", pokemon);
 
   // Data to SinglePage
   const dataToPass = {
@@ -107,9 +104,7 @@ const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
               )}
             </Flex>
             <Image
-              src={
-                pokemon?.mainImage ? pokemon?.mainImage : pokemon?.backupImage
-              }
+              src={pokemon.mainImage ? pokemon.mainImage : pokemon.backupImage}
               backgroundImage={
                 "linear-gradient(to bottom, #ffffff, #ffecff, #ffd3da, #ffd27d, #f8ef09)"
               }

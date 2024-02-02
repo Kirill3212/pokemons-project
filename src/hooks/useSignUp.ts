@@ -6,7 +6,7 @@ import { validatePassword } from "../utils/validatePassword";
 import { useShowToast } from "./useShowToast";
 
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "./index";
+import { useAppDispatch } from ".";
 
 import { localStorageHelpers } from "../utils/localStorageHelpers";
 

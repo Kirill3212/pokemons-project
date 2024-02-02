@@ -190,7 +190,7 @@ const SingleCard = () => {
               <Text fontWeight={500} color={"#83C785"}>
                 Type:
               </Text>
-              <Text ml={2}>{pokemon.type}</Text>
+              <Text ml={2}>{pokemon.type[0]}</Text>
             </Flex>
             <Flex>
               <Text fontWeight={500} color={"#6F45B9"}>

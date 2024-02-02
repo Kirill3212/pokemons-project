@@ -6,7 +6,7 @@ import { useShowToast } from "./useShowToast";
 
 import { useNavigate } from "react-router-dom";
 
-import { useAppDispatch } from "./index";
+import { useAppDispatch } from ".";
 
 import { logIn } from "../store/slices/userSlice";
 import { setFavorites } from "../store/slices/favoritesSlice";

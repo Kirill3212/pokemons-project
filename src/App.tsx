@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import { init } from "./store/actions/init";
-import { useAppDispatch } from "./hooks/index";
+import { useAppDispatch } from "./hooks";
 
 // Pages
 import Layout from "./components/Layout";
