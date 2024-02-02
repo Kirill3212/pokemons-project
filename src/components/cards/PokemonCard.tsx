@@ -45,7 +45,7 @@ const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
   const { data: pokemon } =
     useGetPokemonByNameOrIdQuery<SinglePokemonData>(pokemonId);
 
-  console.log("PokemonCard -", pokemon);
+  // console.log("PokemonCard -", pokemon);
 
   // Data to SinglePage
   const dataToPass = {

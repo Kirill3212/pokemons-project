@@ -1,17 +1,15 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import { Image, Heading, Flex, Text, VStack } from "@chakra-ui/react";
-import { ArrowLeftIcon } from "@chakra-ui/icons";
-import { ArrowRightIcon } from "@chakra-ui/icons";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 
 import pokeballHeartNotActive from "../../assets/pokeballHeartNotActive.png";
 import pokeballHeartActive from "../../assets/pokeballHeartActive.png";
-import loadingSearch from "../../assets/loadingSearch.gif";
-import meowText from "../../assets/meowText.png";
 
 import SingleCardImage from "./SingleCardImage";
 import SingleCardStats from "./SingleCardStats";
+import SingleCardAttacks from "./SingleCardAttacks";
+import SingleCardKitty from "./SingleCardKitty";
 
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -22,8 +20,6 @@ import { getAuthStatusSelector } from "../../store/slices/userSlice";
 import { useCheckIfIsLikedAndAddToFavorites } from "../../hooks/useCheckIfIsLikedAndAddToFavorites";
 
 const SingleCard = () => {
-  const [attackPosition, setAttackPosition] = useState(0);
-  const [meow, setMeow] = useState(false);
   const location = useLocation();
   const isAuthorized = useAppSelector(getAuthStatusSelector);
   const navigate = useNavigate();
@@ -39,27 +35,6 @@ const SingleCard = () => {
       checkIfIsLiked(pokemon);
     }
   });
-
-  const showMeow = () => {
-    setMeow(true);
-    setTimeout(() => {
-      setMeow(false);
-    }, 2000);
-  };
-
-  // Slider of Attacks
-  const changeAttackForwards = () => {
-    let next = attackPosition;
-    if (next >= pokemon.attacks.length - 1) {
-      setAttackPosition(0);
-    } else setAttackPosition(next + 1);
-  };
-  const changeAttackBackwards = () => {
-    let prev = attackPosition;
-    if (prev <= 0) {
-      setAttackPosition(pokemon.attacks.length - 1);
-    } else setAttackPosition(prev - 1);
-  };
 
   return (
     <Flex
@@ -94,22 +69,7 @@ const SingleCard = () => {
               : `Back to ${invokedPage}`}
           </Text>
         </Flex>
-        <VStack position={"relative"}>
-          {meow && (
-            <Image
-              src={meowText}
-              width={"30px"}
-              position={"absolute"}
-              right={"55px"}
-            />
-          )}
-          <Image
-            src={loadingSearch}
-            width={"75px"}
-            cursor={"pointer"}
-            onMouseOver={showMeow}
-          />
-        </VStack>
+        <SingleCardKitty />
       </Flex>
       <Flex
         boxShadow={"0px 0px 3px grey"}
@@ -166,44 +126,7 @@ const SingleCard = () => {
           pl={{ base: "35px", md: 0, lg: 0 }}
         >
           <SingleCardStats pokemon={pokemon} />
-
-          {/*Attack Slider */}
-          <VStack
-            mt={{ base: "5px", md: 0, lg: 0 }}
-            mb={{ base: "15px", md: 0, lg: 0 }}
-            pr={{ base: "22px", md: 0, lg: 0 }}
-          >
-            <Text color="red.500" fontWeight={600} mt={3}>
-              Attacks
-            </Text>
-            <Flex
-              justifyContent={"space-around"}
-              alignItems={"center"}
-              width={"100%"}
-              bg={"purple.600"}
-              borderRadius={6}
-            >
-              <ArrowLeftIcon
-                cursor={"pointer"}
-                color="#F6C52E"
-                width={"13px"}
-                transition={"0.2s"}
-                _hover={{ color: "yellow.500" }}
-                onClick={changeAttackBackwards}
-              />
-              <Text pb={1} userSelect={"none"} color={"red.300"}>
-                {pokemon.attacks[attackPosition]}
-              </Text>
-              <ArrowRightIcon
-                cursor={"pointer"}
-                color="#F6C52E"
-                width={"13px"}
-                transition={"0.2s"}
-                _hover={{ color: "yellow.500" }}
-                onClick={changeAttackForwards}
-              />
-            </Flex>
-          </VStack>
+          <SingleCardAttacks pokemon={pokemon} />
         </Flex>
       </Flex>
     </Flex>
