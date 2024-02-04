@@ -20,7 +20,9 @@ const SingleCardImage = ({ pokemon }: SingleCardImageProps) => {
         src={
           pokemon.animatedImage
             ? pokemon.animatedImage
-            : pokemon.mainImage && pokemon.backupImage
+            : pokemon.mainImage
+            ? pokemon.mainImage
+            : pokemon.backupImage
         }
         width={{ base: "50%", md: "50%", lg: "55%" }}
         height={{ base: "50%", md: "50%", lg: "55%" }}

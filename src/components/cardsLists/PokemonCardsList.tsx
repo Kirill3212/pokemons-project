@@ -68,7 +68,11 @@ const PokemonCardsList = () => {
 
         {pokemons &&
           pokemons.results.map((pokemon: SinglePokemonResponse) => (
-            <PokemonCard key={pokemon.name} pokemonData={pokemon} />
+            <PokemonCard
+              key={pokemon.name}
+              pokemonData={pokemon}
+              invokedPage={"Home"}
+            />
           ))}
       </Grid>
 

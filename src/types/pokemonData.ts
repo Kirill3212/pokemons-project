@@ -25,14 +25,27 @@ export interface SinglePokemonCardResponse {
     weight: number
 }
 
+export interface PokemonTypeResponse {
+    damage_relations: Object,
+    game_indices: [],
+    generation: Object,
+    id: number,
+    move_damage_class: Object,
+    moves: [],
+    name: string,
+    names: Object,
+    past_damage_relations: [],
+    pokemon: []
+}
+
 export interface SinglePokemonData {
     id: number
-    attacks: [],
+    attacks: string[],
     experience: number,
     height: number,
     weight: number,
     name: string,
-    type: string,
+    type: string[],
     // Images
     mainImage: string,
     backupImage: string,

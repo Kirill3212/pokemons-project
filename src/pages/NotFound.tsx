@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Flex, VStack, Image, Text, Button } from "@chakra-ui/react";
 import notFound from "../assets/notFound.png";
 import sleepingText from "../assets/sleepingText.png";
@@ -8,12 +8,13 @@ const NotFound = () => {
   const [sleeping, setSleeping] = useState(false);
   const navigate = useNavigate();
 
-  const showSleeping = () => {
-    setSleeping(true);
-    setTimeout(() => {
-      setSleeping(false);
-    }, 2000);
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSleeping((prevState) => !prevState);
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Flex width={"100%"} justifyContent={"center"}>
@@ -27,15 +28,10 @@ const NotFound = () => {
             top={"-40px"}
           />
         )}
-        <Image
-          src={notFound}
-          width={"300px"}
-          cursor={"pointer"}
-          onMouseOver={showSleeping}
-        />
+        <Image src={notFound} width={"300px"} />
         <Text fontWeight={"bold"}>Sorry, There is no such page &#128517;</Text>
         <Button mt={"10px"} onClick={() => navigate("/")}>
-          Go Home{" "}
+          Go Home
         </Button>
       </VStack>
     </Flex>

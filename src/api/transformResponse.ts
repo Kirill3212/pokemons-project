@@ -1,4 +1,5 @@
 import { SinglePokemonCardResponse } from "../types/pokemonData";
+import { PokemonTypeResponse } from "../types/pokemonData";
 
 export function transformSinglePokemon (responseData: SinglePokemonCardResponse) {
     if(!responseData){
@@ -17,6 +18,17 @@ export function transformSinglePokemon (responseData: SinglePokemonCardResponse)
         mainImage: responseData.sprites.other.dream_world.front_default,
         backupImage: responseData.sprites.front_default,
         animatedImage: responseData.sprites.other.showdown.front_default,
+    }
+}
+
+export function transformTypePokemon (responseData: PokemonTypeResponse) {
+    if(!responseData){
+        throw new Error("Response is incorrect")
+    }
+    return {
+        id: responseData.id,
+        name: responseData.name,
+        pokemons: responseData.pokemon
     }
 }
 
