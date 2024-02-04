@@ -30,9 +30,10 @@ import { getPokemonId } from "../../utils/getPokemonId";
 
 interface PokemonCardProps {
   pokemonData: SinglePokemonResponse;
+  invokedPage: string;
 }
 
-const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
+const PokemonCard = ({ pokemonData, invokedPage }: PokemonCardProps) => {
   const isAuthorized = useAppSelector(getAuthStatusSelector);
   const navigate = useNavigate();
   const toast = useShowToast();
@@ -45,7 +46,7 @@ const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
   // Data to SinglePage
   const dataToPass = {
     data: pokemon,
-    invokePage: "Home",
+    invokePage: invokedPage,
   };
 
   useEffect(() => {
@@ -56,6 +57,7 @@ const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
     <VStack>
       {pokemon && (
         <GridItem
+          minW={"210px"}
           flexDirection={"column"}
           boxShadow={"0px 0px 3px grey"}
           m={2}

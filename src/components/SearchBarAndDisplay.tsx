@@ -56,7 +56,7 @@ const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
   };
 
   return (
-    <Flex flexDirection={"column"} alignItems={"center"} mb={"40px"}>
+    <Flex flexDirection={"column"} alignItems={"center"} mb={"30px"}>
       <Flex width={{ base: "300px", md: "400px", lg: "500px" }} mt={5}>
         <form onSubmit={handleSearch} style={{ width: "100%" }}>
           <InputGroup>
