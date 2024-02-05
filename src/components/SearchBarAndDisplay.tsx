@@ -37,7 +37,7 @@ interface SearchBarProps {
 }
 
 const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
-  const [searchInput, setSearchInput] = useState(homeInputSearch.state);
+  const [searchInput, setSearchInput] = useState(homeInputSearch.state || "");
   const debouncedSearchInput = useDebounce(searchInput, 500);
   const dispatch = useAppDispatch();
 
