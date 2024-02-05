@@ -4,7 +4,7 @@ import { Flex, Image, Heading, Button, VStack, Text } from "@chakra-ui/react";
 
 import pokeballHistory from "../assets/pokeballHistory.png";
 import runningPikachu from "../assets/runningPikachu.gif";
-import historyEmpty from "../assets/historyEmpty.png";
+import historyEmpty2 from "../assets/historyEmpty2.png";
 import pokeball from "../assets/pokeball.gif";
 import booText from "../assets/booText.png";
 
@@ -107,9 +107,8 @@ const History = () => {
         ) : (
           <VStack>
             <Image
-              width={{ base: "90px", md: "110px", lg: "150px" }}
-              src={historyEmpty}
-              ml={"50px"}
+              width={{ base: "90px", md: "110px", lg: "110px" }}
+              src={historyEmpty2}
             />
             <Text
               fontSize={{ base: "13px", md: "15px", lg: "20px" }}

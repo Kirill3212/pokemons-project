@@ -21,7 +21,6 @@ const SearchBarHomePage = () => {
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(updateHistory(searchInput));
     navigate("/Search", { state: searchInput });
   };
 

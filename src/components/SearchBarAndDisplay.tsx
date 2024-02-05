@@ -47,6 +47,10 @@ const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
     isLoading,
   } = useGetPokemonByNameOrIdQuery(debouncedSearchInput || null);
 
+  if (pokemon) {
+    dispatch(updateHistory(searchInput));
+  }
+
   const handleSearch = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchInput(searchInput);
