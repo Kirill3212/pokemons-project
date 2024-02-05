@@ -9,7 +9,7 @@ const Favorites = () => {
         alignItems={"center"}
         flexDirection={"column"}
         mt={{ base: 0, md: -5, lg: -8 }}
-        mb={10}
+        mb={{ base: 10, md: 3, lg: 2 }}
       >
         <Image
           src={favoriteCollection}
