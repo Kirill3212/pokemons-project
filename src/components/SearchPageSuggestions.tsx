@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+import { pokemonTypes } from "../pokemonTypes";
+
 import { Flex, Text, Image, VStack } from "@chakra-ui/react";
 
 import searchSuggestion from "../assets/searchSuggestion.png";
@@ -11,27 +13,7 @@ import PokemonSuggestionsCardsList from "./cardsLists/PokemonSuggestionsCardsLis
 
 const SearchPageSuggestions = () => {
   const [type, setType] = useState("");
-
-  const types = [
-    "normal",
-    "fighting",
-    "flying",
-    "poison",
-    "ground",
-    "rock",
-    "bug",
-    "ghost",
-    "steel",
-    "fire",
-    "water",
-    "grass",
-    "electric",
-    "psychic",
-    "ice",
-    "dragon",
-    "dark",
-    "fairy",
-  ];
+  const types = pokemonTypes;
 
   const { data: pokemons } = useGetPokemonsByTypeQuery(type || null);
 

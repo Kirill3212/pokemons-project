@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { GridItem, Image, Heading, Button, Box } from "@chakra-ui/react";
 import { IoMdCloseCircle } from "react-icons/io";
 
@@ -67,6 +68,22 @@ const PokemonFavoriteCard = ({ pokemon }: PokemonFavoriteCardProps) => {
       </Button>
     </GridItem>
   );
+};
+
+PokemonFavoriteCard.propTypes = {
+  pokemon: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    attacks: PropTypes.arrayOf(PropTypes.string).isRequired,
+    experience: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    weight: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.arrayOf(PropTypes.string).isRequired,
+    // Images
+    mainImage: PropTypes.string.isRequired,
+    backupImage: PropTypes.string.isRequired,
+    animatedImage: PropTypes.string.isRequired,
+  }),
 };
 
 export default PokemonFavoriteCard;

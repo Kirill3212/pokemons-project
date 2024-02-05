@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+import PropTypes from "prop-types";
+
 import { Image, Heading, Button, Flex, Text } from "@chakra-ui/react";
 
 import { useNavigate } from "react-router-dom";
@@ -130,6 +132,22 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
       </Flex>
     </Flex>
   );
+};
+
+PokemonCardSearch.propTypes = {
+  pokemon: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    attacks: PropTypes.arrayOf(PropTypes.string).isRequired,
+    experience: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    weight: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.arrayOf(PropTypes.string).isRequired,
+    // Images
+    mainImage: PropTypes.string.isRequired,
+    backupImage: PropTypes.string.isRequired,
+    animatedImage: PropTypes.string.isRequired,
+  }),
 };
 
 export default PokemonCardSearch;

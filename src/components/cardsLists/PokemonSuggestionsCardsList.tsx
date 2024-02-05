@@ -1,5 +1,16 @@
-import { Grid, Heading, Flex, Text, VStack } from "@chakra-ui/react";
+import { useState } from "react";
+
+import {
+  Grid,
+  Heading,
+  Flex,
+  Text,
+  VStack,
+  Divider,
+  Image,
+} from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
+import pokeballHeartActive from "../../assets/pokeballHeartActive.png";
 
 import PokemonCard from "../cards/PokemonCard";
 
@@ -21,6 +32,8 @@ type Pokemons = {
 const PokemonSuggestionsCardsList = ({
   pokemonsData,
 }: PokemonCardsSuggestionsProps) => {
+  const [cardsToShow, setCardsToShow] = useState(15);
+
   return (
     <VStack width={"100%"} justifyContent={"center"} alignItems={"center"}>
       <Heading
@@ -34,7 +47,7 @@ const PokemonSuggestionsCardsList = ({
       </Heading>
 
       {pokemonsData.pokemons.length > 1 ? (
-        <VStack width={"65%"} justifyContent={"center"}>
+        <VStack width={"100%"} justifyContent={"center"}>
           <Flex
             justifyContent={{ base: "center", md: "left", lg: "left" }}
             width={"100%"}
@@ -64,16 +77,43 @@ const PokemonSuggestionsCardsList = ({
             justifyItems={"center"}
             position={"relative"}
           >
-            {pokemonsData.pokemons.map((pokemon: Pokemons) => (
-              <PokemonCard
-                key={pokemon.pokemon.name}
-                pokemonData={pokemon.pokemon}
-                invokedPage={"Search"}
-              />
-            ))}
+            {pokemonsData.pokemons.map(
+              (pokemon: Pokemons, i) =>
+                i <= cardsToShow && (
+                  <PokemonCard
+                    key={pokemon.pokemon.name}
+                    pokemonData={pokemon.pokemon}
+                    invokedPage={"Search"}
+                  />
+                )
+            )}
           </Grid>
         </VStack>
       ) : null}
+
+      <Flex
+        mt={6}
+        width={{ base: "200px", md: "350px", lg: "400px" }}
+        alignItems={"center"}
+      >
+        <Divider orientation="horizontal" mr={3} borderWidth="1px" />
+        <Image
+          src={pokeballHeartActive}
+          cursor={"pointer"}
+          mt={5}
+          transition={"0.3s"}
+          _hover={{ transform: "scale(1.2)" }}
+          width={"30px"}
+          onClick={() => setCardsToShow(cardsToShow + 8)}
+          pb={4}
+        ></Image>
+        <Divider
+          orientation="horizontal"
+          color={"red"}
+          ml={3}
+          borderWidth="1px"
+        />
+      </Flex>
     </VStack>
   );
 };
