@@ -1,6 +1,7 @@
 import { Flex, Image, Heading } from "@chakra-ui/react";
 import favoriteCollection from "../assets/favoriteCollection.png";
 import PokemonFavoriteCardsList from "../components/cardsLists/PokemonFavoriteCardsList";
+import ScrollButton from "../components/ScrollButton";
 
 const Favorites = () => {
   return (
@@ -26,6 +27,7 @@ const Favorites = () => {
         </Heading>
       </Flex>
       <PokemonFavoriteCardsList />
+      <ScrollButton />
     </Flex>
   );
 };
