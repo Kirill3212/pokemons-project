@@ -1,29 +1,24 @@
-import { Component, ErrorInfo, ReactNode } from "react";
+import { Component } from "react";
+import ErrorMessage from "./ErrorMessage";
 
-type ErrorBoundaryProps = {
-  children: ReactNode;
+type Props = {
+  children: React.ReactNode;
 };
 
-type ErrorBoundaryState = {
-  hasError: boolean;
-};
-
-class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
+class ErrorBoundary extends Component<Props, { hasError: boolean }> {
+  constructor(props: Props) {
     super(props);
-    this.state = {
-      hasError: false,
-    };
+    this.state = { hasError: false };
   }
 
-  componentDidCatch(error: Error, info: ErrorInfo) {
-    console.error(error, info);
-    this.setState({ hasError: true });
+  static getDerivedStateFromError(error: Error) {
+    console.log(error);
+    return { hasError: true };
   }
 
   render() {
     if (this.state.hasError) {
-      return <div>Error occurred</div>;
+      return <ErrorMessage />;
     }
     return this.props.children;
   }

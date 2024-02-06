@@ -5,6 +5,8 @@ import {
   Route,
 } from "react-router-dom";
 
+import ErrorBoundary from "../components/ErrorBoundary";
+
 import Layout from "../components/Layout";
 import Loading from "../components/Loading";
 import { PrivateRoute } from "./privateRoute";
@@ -25,7 +27,9 @@ export const router = createBrowserRouter(
       path={"/"}
       element={
         <Suspense fallback={<Loading />}>
-          <Layout />
+          <ErrorBoundary>
+            <Layout />
+          </ErrorBoundary>
         </Suspense>
       }
     >
