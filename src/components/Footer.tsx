@@ -31,7 +31,7 @@ const Footer = () => {
           </a>
         </ListItem>
         <ListItem>
-          <a href="#" target="blank">
+          <a href="https://t.me/pink_Fairy_je" target="blank">
             Telegram
           </a>
         </ListItem>

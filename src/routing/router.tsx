@@ -14,7 +14,7 @@ const Home = lazy(() => import("../pages/Home"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const SingleCard = lazy(() => import("../pages/singleCard/SingleCard"));
 const Favorites = lazy(() => import("../pages/Favorites"));
-const History = lazy(() => import("../pages/History"));
+const History = lazy(() => import("../pages/history/History"));
 const SignIn = lazy(() => import("../pages/auth/SignIn"));
 const SignUp = lazy(() => import("../pages/auth/SignUp"));
 const Search = lazy(() => import("../pages/Search"));

@@ -42,6 +42,7 @@ const PokemonFavoriteCard = ({ pokemon }: PokemonFavoriteCardProps) => {
       <Image
         src={pokemon.mainImage ? pokemon.mainImage : pokemon.backupImage}
         boxSize="150px"
+        alt={pokemon.name}
         backgroundImage={
           "linear-gradient(to bottom, #ffffff, #ffecff, #ffd3da, #ffd27d, #f8ef09)"
         }
@@ -74,15 +75,27 @@ PokemonFavoriteCard.propTypes = {
   pokemon: PropTypes.shape({
     id: PropTypes.number.isRequired,
     attacks: PropTypes.arrayOf(PropTypes.string).isRequired,
-    experience: PropTypes.number.isRequired,
+    experience: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.oneOf([null]).isRequired,
+    ]),
     height: PropTypes.number.isRequired,
     weight: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.arrayOf(PropTypes.string).isRequired,
     // Images
-    mainImage: PropTypes.string.isRequired,
-    backupImage: PropTypes.string.isRequired,
-    animatedImage: PropTypes.string.isRequired,
+    mainImage: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.oneOf([null]).isRequired,
+    ]),
+    backupImage: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.oneOf([null]).isRequired,
+    ]),
+    animatedImage: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.oneOf([null]).isRequired,
+    ]),
   }),
 };
 

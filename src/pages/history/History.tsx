@@ -1,26 +1,24 @@
 import { useState } from "react";
 
-import { Flex, Image, Heading, Button, VStack, Text } from "@chakra-ui/react";
+import { Flex, Image, Button, VStack, Text } from "@chakra-ui/react";
 
-import pokeballHistory from "../assets/pokeballHistory.png";
-import runningPikachu from "../assets/runningPikachu.gif";
-import historyEmpty2 from "../assets/historyEmpty2.png";
-import pokeball from "../assets/pokeball.gif";
-import booText from "../assets/booText.png";
+import historyEmpty2 from "../../assets/historyEmpty2.png";
+import pokeball from "../../assets/pokeball.gif";
 
-import { SinglePokemonData } from "../types/pokemonData";
+import { SinglePokemonData } from "../../types/pokemonData";
+
+import HistoryHeader from "./HistoryHeader";
 
 import { useNavigate } from "react-router";
 
-import { useAppSelector } from "../hooks";
-import { useAppDispatch } from "../hooks";
+import { useAppSelector } from "../../hooks";
+import { useAppDispatch } from "../../hooks";
 
-import { clearHistory } from "../store/slices/historySlice";
-import { getHistorySelector } from "../store/slices/historySlice";
+import { clearHistory } from "../../store/slices/historySlice";
+import { getHistorySelector } from "../../store/slices/historySlice";
 
 const History = () => {
   const [isThrown, setIsThrown] = useState(false);
-  const [boo, setBoo] = useState(false);
   const history = useAppSelector(getHistorySelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -35,53 +33,9 @@ const History = () => {
     }, 1800);
   };
 
-  const showBoo = () => {
-    setBoo(true);
-    setTimeout(() => {
-      setBoo(false);
-    }, 2000);
-  };
-
   return (
     <Flex flexDirection={"column"} width={"100%"} alignItems={"center"}>
-      {/* Header */}
-      <Flex alignItems={"center"} mt={{ base: 0, md: -5, lg: "-60px" }}>
-        <Heading
-          fontSize={{ base: 20, md: 30, lg: 38 }}
-          textAlign={"center"}
-          color={"#F6C52E"}
-          letterSpacing={5}
-        >
-          Your Catching
-        </Heading>
-        <VStack position={"relative"} mb={8}>
-          {boo && (
-            <Image
-              src={booText}
-              width={"30px"}
-              position={"absolute"}
-              top={{ base: "3px", md: "10px", lg: "20px" }}
-              right={{ base: "-10px", md: "-2px", lg: "5px" }}
-            />
-          )}
-          <Image
-            width={{ base: "50px", md: "60px", lg: "70px" }}
-            top={{ base: "22px", md: "26px", lg: "32px" }}
-            position={"relative"}
-            cursor={"pointer"}
-            src={runningPikachu}
-            onMouseOver={showBoo}
-          />
-          <Image
-            width={{ base: "80px", md: "100px", lg: "130px" }}
-            src={pokeballHistory}
-          />
-        </VStack>
-        <Heading color={"red.500"} fontSize={{ base: 20, md: 30, lg: 38 }}>
-          History
-        </Heading>
-      </Flex>
-
+      <HistoryHeader />
       <VStack position={"relative"}>
         {/* History */}
         {uniqueHistory.length ? (
@@ -90,6 +44,7 @@ const History = () => {
               flexDirection={{ base: "column", md: "row", lg: "row" }}
               flexWrap={"wrap"}
               maxW={"600px"}
+              justifyContent={"center"}
             >
               {uniqueHistory.map((item: SinglePokemonData, index) => (
                 <Text
@@ -105,7 +60,15 @@ const History = () => {
                     })
                   }
                 >
-                  {item.name} (Index: {item.id})
+                  {item.name}{" "}
+                  <Text
+                    as={"span"}
+                    color={"blue.500"}
+                    transition={"0.3s"}
+                    _hover={{ color: "yellow.400" }}
+                  >
+                    (Index: {item.id})
+                  </Text>
                 </Text>
               ))}
             </Flex>
