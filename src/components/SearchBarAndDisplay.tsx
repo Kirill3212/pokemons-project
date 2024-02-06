@@ -1,12 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Flex,
   Input,
   InputGroup,
   InputLeftElement,
-  Grid,
-  GridItem,
   VStack,
   Text,
   Image,
@@ -37,7 +35,7 @@ interface SearchBarProps {
 }
 
 const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
-  const [searchInput, setSearchInput] = useState(homeInputSearch.state);
+  const [searchInput, setSearchInput] = useState(homeInputSearch.state || "");
   const debouncedSearchInput = useDebounce(searchInput, 500);
   const dispatch = useAppDispatch();
 
@@ -45,13 +43,21 @@ const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
     data: pokemon,
     isError,
     isLoading,
+    isFetching,
   } = useGetPokemonByNameOrIdQuery(debouncedSearchInput || null);
+
+  // Update the first input received from home page
+  useEffect(() => {
+    if (pokemon && !isLoading && !isFetching && !isError) {
+      dispatch(updateHistory(pokemon));
+    }
+  });
 
   const handleSearch = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchInput(searchInput);
-    if (!isError && !isLoading && pokemon) {
-      dispatch(updateHistory(searchInput));
+    if (!isError && !isLoading && !isFetching && pokemon) {
+      dispatch(updateHistory(pokemon));
     }
   };
 
@@ -74,33 +80,42 @@ const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
           </InputGroup>
           <Flex
             width={"100%"}
-            justifyContent={"right"}
+            justifyContent={"space-between"}
             alignItems={"center"}
-            cursor={"pointer"}
             color={"green.500"}
             mt={1}
           >
-            <Tooltip
-              hasArrow
-              label="You can write a number from 0 to 1064 or just pokemon's name, for example charizard :) Also from 10001 to 10277 are unique pokemons ! Have fun :)"
-              borderRadius={5}
-              p={2}
+            <Text
+              fontSize={"13px"}
+              color={"red.700"}
+              visibility={isError ? "visible" : "hidden"}
+              ml={2}
             >
-              <Text fontSize={"13px"}>Help</Text>
-            </Tooltip>
-            <TbBulb size={15} />
+              Sorry, can't find this pokemon
+            </Text>
+            <Flex cursor={"pointer"}>
+              <Tooltip
+                hasArrow
+                label="You can write a number from 0 to 1064 or just pokemon's name, for example charizard :) Also from 10001 to 10277 are unique pokemons ! Have fun :)"
+                borderRadius={5}
+                p={2}
+              >
+                <Text fontSize={"13px"}>Help</Text>
+              </Tooltip>
+              <TbBulb size={15} />
+            </Flex>
           </Flex>
         </form>
       </Flex>
       <VStack>
         {isError && <SearchPageSuggestions />}
-        {isLoading && <Image src={loadingSearch} mt={"40px"} width={"150px"} />}
-        {pokemon && !isError && !isLoading && (
-          <Grid mt={8}>
-            <GridItem>
-              <PokemonCardSearch pokemon={pokemon} />
-            </GridItem>
-          </Grid>
+        {isLoading || isFetching ? (
+          <Image src={loadingSearch} mt={"40px"} width={"150px"} />
+        ) : null}
+        {pokemon && !isError && !isLoading && !isFetching && (
+          <Flex mt={8}>
+            <PokemonCardSearch pokemon={pokemon} />
+          </Flex>
         )}
       </VStack>
     </Flex>

@@ -11,17 +11,13 @@ import { SearchIcon } from "@chakra-ui/icons";
 import { TbBulb } from "react-icons/tb";
 
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../hooks";
-import { updateHistory } from "../store/slices/historySlice";
 
 const SearchBarHomePage = () => {
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(updateHistory(searchInput));
     navigate("/Search", { state: searchInput });
   };
 

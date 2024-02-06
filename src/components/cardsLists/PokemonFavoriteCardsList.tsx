@@ -81,7 +81,7 @@ const PokemonFavoriteCardsList = () => {
           justifyContent={"center"}
           flexDirection={"column"}
           alignItems={"center"}
-          mt={-2}
+          mt={6}
         >
           <Image
             src={collectionEmpty}

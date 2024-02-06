@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+import PropTypes from "prop-types";
+
 import { Image, Heading, Button, Flex, Text } from "@chakra-ui/react";
 
 import { useNavigate } from "react-router-dom";
@@ -52,6 +54,7 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
       <Image
         src={pokemon.mainImage ? pokemon.mainImage : pokemon.backupImage}
         boxSize={{ base: "150px", md: "150px", lg: "180px" }}
+        alt={pokemon.name}
         maxWidth={"170px"}
         backgroundImage={
           "linear-gradient(to bottom, #ffffff, #ffecff, #ffd3da, #ffd27d, #f8ef09)"
@@ -130,6 +133,34 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
       </Flex>
     </Flex>
   );
+};
+
+PokemonCardSearch.propTypes = {
+  pokemon: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    attacks: PropTypes.arrayOf(PropTypes.string).isRequired,
+    experience: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.oneOf([null]).isRequired,
+    ]),
+    height: PropTypes.number.isRequired,
+    weight: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.arrayOf(PropTypes.string).isRequired,
+    // Images
+    mainImage: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.oneOf([null]).isRequired,
+    ]),
+    backupImage: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.oneOf([null]).isRequired,
+    ]),
+    animatedImage: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.oneOf([null]).isRequired,
+    ]),
+  }),
 };
 
 export default PokemonCardSearch;

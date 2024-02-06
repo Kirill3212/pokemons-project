@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+import { pokemonTypes } from "../pokemonTypes";
+
 import { Flex, Text, Image, VStack } from "@chakra-ui/react";
 
 import searchSuggestion from "../assets/searchSuggestion.png";
@@ -11,27 +13,7 @@ import PokemonSuggestionsCardsList from "./cardsLists/PokemonSuggestionsCardsLis
 
 const SearchPageSuggestions = () => {
   const [type, setType] = useState("");
-
-  const types = [
-    "normal",
-    "fighting",
-    "flying",
-    "poison",
-    "ground",
-    "rock",
-    "bug",
-    "ghost",
-    "steel",
-    "fire",
-    "water",
-    "grass",
-    "electric",
-    "psychic",
-    "ice",
-    "dragon",
-    "dark",
-    "fairy",
-  ];
+  const types = pokemonTypes;
 
   const { data: pokemons } = useGetPokemonsByTypeQuery(type || null);
 
@@ -59,8 +41,8 @@ const SearchPageSuggestions = () => {
             mt={4}
             textAlign={"center"}
             justifyContent={"center"}
-            width={"350px"}
-            flexDirection={{ base: "column", md: "row", lg: "row" }}
+            width={{ base: "250", md: "350px", lg: '"350px"' }}
+            maxW={"350px"}
             flexWrap={"wrap"}
           >
             {types.map((type) => (
@@ -69,6 +51,7 @@ const SearchPageSuggestions = () => {
                 cursor={"pointer"}
                 ml={"5px"}
                 mr={"5px"}
+                fontSize={{ base: "13px", md: "15px", lg: "17px" }}
                 _hover={{ color: "yellow.400" }}
                 transition={"0.2s"}
                 onClick={() => handleChangeType(type)}
