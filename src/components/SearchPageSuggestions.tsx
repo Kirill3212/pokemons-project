@@ -41,8 +41,8 @@ const SearchPageSuggestions = () => {
             mt={4}
             textAlign={"center"}
             justifyContent={"center"}
-            width={"350px"}
-            flexDirection={{ base: "column", md: "row", lg: "row" }}
+            width={{ base: "250", md: "350px", lg: '"350px"' }}
+            maxW={"350px"}
             flexWrap={"wrap"}
           >
             {types.map((type) => (
@@ -51,6 +51,7 @@ const SearchPageSuggestions = () => {
                 cursor={"pointer"}
                 ml={"5px"}
                 mr={"5px"}
+                fontSize={{ base: "13px", md: "15px", lg: "17px" }}
                 _hover={{ color: "yellow.400" }}
                 transition={"0.2s"}
                 onClick={() => handleChangeType(type)}

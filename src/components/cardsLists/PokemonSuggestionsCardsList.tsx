@@ -38,8 +38,8 @@ const PokemonSuggestionsCardsList = ({
     <VStack width={"100%"} justifyContent={"center"} alignItems={"center"}>
       <Heading
         fontSize={"22px"}
-        mb={"15px"}
-        mt={"25px"}
+        mb={"10px"}
+        mt={"35px"}
         textTransform={"capitalize"}
         color={"darkgray"}
       >
