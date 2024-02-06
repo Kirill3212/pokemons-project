@@ -8,6 +8,8 @@ import historyEmpty2 from "../assets/historyEmpty2.png";
 import pokeball from "../assets/pokeball.gif";
 import booText from "../assets/booText.png";
 
+import { SinglePokemonData } from "../types/pokemonData";
+
 import { useNavigate } from "react-router";
 
 import { useAppSelector } from "../hooks";
@@ -22,6 +24,9 @@ const History = () => {
   const history = useAppSelector(getHistorySelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const uniqueHistory = Array.from(
+    new Set(history.map((obj) => JSON.stringify(obj)))
+  ).map((str) => JSON.parse(str));
 
   const goForPokemons = () => {
     setIsThrown(true);
@@ -37,7 +42,6 @@ const History = () => {
     }, 2000);
   };
 
-  // console.log(history);
   return (
     <Flex flexDirection={"column"} width={"100%"} alignItems={"center"}>
       {/* Header */}
@@ -80,20 +84,32 @@ const History = () => {
 
       <VStack position={"relative"}>
         {/* History */}
-        {history.length ? (
+        {uniqueHistory.length ? (
           <VStack>
             <Flex
               flexDirection={{ base: "column", md: "row", lg: "row" }}
               flexWrap={"wrap"}
               maxW={"600px"}
             >
-              {history.map((item, index) => (
-                <Text key={index} ml={2} mr={2} cursor={"pointer"}>
-                  {item}
+              {uniqueHistory.map((item: SinglePokemonData, index) => (
+                <Text
+                  key={index}
+                  ml={2}
+                  mr={2}
+                  cursor={"pointer"}
+                  transition={"0.3s"}
+                  _hover={{ color: "yellow.400" }}
+                  onClick={() =>
+                    navigate("/SingleCard", {
+                      state: { data: item, invokePage: "History" },
+                    })
+                  }
+                >
+                  {item.name} (Index: {item.id})
                 </Text>
               ))}
             </Flex>
-            {history.length ? (
+            {uniqueHistory.length ? (
               <Button
                 mb={4}
                 mt={3}
@@ -107,7 +123,7 @@ const History = () => {
         ) : (
           <VStack>
             <Image
-              width={{ base: "90px", md: "110px", lg: "110px" }}
+              width={{ base: "90px", md: "100px", lg: "100px" }}
               src={historyEmpty2}
             />
             <Text
@@ -134,7 +150,7 @@ const History = () => {
           </VStack>
         )}
 
-        {history.length && (
+        {uniqueHistory.length && (
           <Text
             as={"span"}
             color={"#F6C52E"}

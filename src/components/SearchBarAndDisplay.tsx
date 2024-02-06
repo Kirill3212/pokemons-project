@@ -49,7 +49,7 @@ const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
   // Update the first input received from home page
   useEffect(() => {
     if (pokemon && !isLoading && !isFetching && !isError) {
-      dispatch(updateHistory(searchInput));
+      dispatch(updateHistory(pokemon));
     }
   }, []);
 
@@ -57,7 +57,7 @@ const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
     e.preventDefault();
     setSearchInput(searchInput);
     if (!isError && !isLoading && !isFetching && pokemon) {
-      dispatch(updateHistory(searchInput));
+      dispatch(updateHistory(pokemon));
     }
   };
 

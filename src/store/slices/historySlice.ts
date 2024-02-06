@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { NameSpace } from "../NameSpace";
 import { State } from "../../types/store";
+import { SinglePokemonData } from "../../types/pokemonData";
 
 type InitialState = {
-    history: []
+    history: SinglePokemonData[]
 }
 
 const initialState: InitialState = {
@@ -21,7 +22,7 @@ export const history = createSlice({
             state.history = []
         },
         updateHistory: (state, action) => {
-            const notExist = state.history.every(item => item !== action.payload)
+            const notExist = state.history.every((item: SinglePokemonData) => item.id !== action.payload.id)
             if(notExist){
                 state.history.push(action.payload)
             }

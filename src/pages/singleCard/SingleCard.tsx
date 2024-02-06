@@ -29,7 +29,7 @@ const SingleCard = () => {
   // Data of Pokemon Sender (PokemonCard, PokemonCardSearch, PokemonFavoriteCard)
   const pokemon = location.state?.data;
   const invokedPage = location.state?.invokePage;
-
+  console.log("SingleCard -", pokemon);
   useEffect(() => {
     if (isAuthorized) {
       checkIfIsLiked(pokemon);
