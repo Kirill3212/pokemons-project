@@ -59,13 +59,14 @@ export const localStorageHelpers = {
     },
 
     // HISTORY
-    updateHistory: (email: string, history: string) => {
+    updateHistory: (email: string, pokemonCard: SinglePokemonData) => {
         const e = localStorage.getItem(email)
         if(e){
             const parsed = JSON.parse(e)
-            const notExist = parsed.history.every((item: string) => item !== history)
+            console.log(parsed)
+            const notExist = parsed.history.every((item: SinglePokemonData) => item.id !== pokemonCard.id)
              if(notExist){
-                localStorage.setItem(email, JSON.stringify({...parsed, history: [...parsed.history, history]}))
+                localStorage.setItem(email, JSON.stringify({...parsed, history: [...parsed.history, pokemonCard]}))
             }
         }
     },
