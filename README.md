@@ -1,10 +1,20 @@
 # Pokemons
 
-The Pokémon world is amazing, as it is inhabited by a lot of cool creatures, which people can capture and train for various purposes such as companionship or battles.
-It is a diverse and vibrant world which you can experience by yourself.
+The Pokémon world is a astonishing and vibrant place, inhabited by a lot of cool creatures, which you can capture and train for various purposes such as companionship or battles.
 
-![My Image](my-image.png)
+Let's have an amazing experience by discovering and catching some of the pokemons 🙂
+
+![My Image](readmeImgs/landingPage.png)
 
 ### React
 
-- Проект написан с использованием функциональных компонентов в приоритете над классовыми ☑️
+- Проект написан с использованием функциональных компонентов в приоритете над классовыми ✅
+- Есть четкое разделение на умные и глупые компоненты ✅ Пример [**глупого**](https://github.com/Kirill3212/aston-project/blob/main/src/components/Footer.tsx) и [**умного**](https://github.com/Kirill3212/aston-project/blob/main/src/components/SearchBarAndDisplay.tsx) компонента
+- Есть рендеринг списков ✅ [**Карточки покемонов**](https://github.com/Kirill3212/aston-project/blob/main/src/components/cardsLists/PokemonCardsList.tsx)
+- Реализована хотя бы одна форма ✅ [**Форма авторизации**](https://github.com/Kirill3212/aston-project/blob/main/src/components/forms/SignUpForm.tsx)
+- Есть применение Контекст API ❌
+- Есть применение предохранителя ✅ [**Предохранитель**](https://github.com/Kirill3212/aston-project/blob/main/src/components/ErrorBoundary.tsx) [**его использование**](https://github.com/Kirill3212/aston-project/blob/main/src/routing/router.tsx)
+- Есть хотя бы один кастомный хук ✅ [**useCheckIfIsLikedAndAddToFavorites**](https://github.com/Kirill3212/aston-project/blob/main/src/hooks/useCheckIfIsLikedAndAddToFavorites.ts)
+- Хотя бы несколько компонентов используют PropTypes ✅ [**Пример использования**](https://github.com/Kirill3212/aston-project/blob/main/src/components/cards/PokemonCardSearch.tsx)
+- Поиск не должен триггерить много запросов к серверу ✅ Реализовао с помощью кастомного хука [**useDebounce**](https://github.com/Kirill3212/aston-project/blob/main/src/hooks/useDebounce.ts) - [**Пример использования**](https://github.com/Kirill3212/aston-project/blob/main/src/components/SearchBarAndDisplay.tsx)
+- Есть применение lazy + Suspense ✅ (https://github.com/Kirill3212/aston-project/blob/main/src/routing/router.tsx)
