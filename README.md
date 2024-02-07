@@ -18,3 +18,16 @@ Let's have an amazing experience by discovering and catching some of the pokemon
 - Хотя бы несколько компонентов используют PropTypes ✅ [**Пример использования**](https://github.com/Kirill3212/aston-project/blob/main/src/components/cards/PokemonCardSearch.tsx)
 - Поиск не должен триггерить много запросов к серверу ✅ Реализовао с помощью кастомного хука [**useDebounce**](https://github.com/Kirill3212/aston-project/blob/main/src/hooks/useDebounce.ts) - [**Пример использования**](https://github.com/Kirill3212/aston-project/blob/main/src/components/SearchBarAndDisplay.tsx)
 - Есть применение lazy + Suspense ✅ (https://github.com/Kirill3212/aston-project/blob/main/src/routing/router.tsx)
+
+### Redux
+
+- Используется Modern Redux with Redux Toolkit ✅
+- Используется слайсы ✅ [**Слайсы**](https://github.com/Kirill3212/aston-project/tree/main/src/store/slices)
+- Есть кастомная мидлвара ✅ [**Мидлвара**](https://github.com/Kirill3212/aston-project/blob/main/src/store/localStorageListenerMiddleware.ts)
+- Используется RTK Query ✅ [**RTK Query**](https://github.com/Kirill3212/aston-project/blob/main/src/api/api.ts)
+- Используется Transforming Responses ✅ [**Transforming Responses**](https://github.com/Kirill3212/aston-project/blob/main/src/api/transformResponse.ts)
+
+## Дополнительно
+
+- Используется TypeScript
+- Используется UI библиотека - Chakra UI
