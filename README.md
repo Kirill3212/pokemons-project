@@ -32,7 +32,7 @@ Creation of this app was possible because of this amazing [**_API_**](https://po
 - Есть четкое разделение на умные и глупые компоненты ✅ Пример [**глупого**](https://github.com/Kirill3212/aston-project/blob/main/src/components/Footer.tsx) и [**умного**](https://github.com/Kirill3212/aston-project/blob/main/src/components/SearchBarAndDisplay.tsx) компонента
 - Есть рендеринг списков ✅ [**Карточки покемонов**](https://github.com/Kirill3212/aston-project/blob/main/src/components/cardsLists/PokemonCardsList.tsx)
 - Реализована хотя бы одна форма ✅ [**Форма авторизации**](https://github.com/Kirill3212/aston-project/blob/main/src/components/forms/SignUpForm.tsx)
-- Есть применение Контекст API ❌
+- Есть применение Контекст API ✅ [**Конткекст**](https://github.com/Kirill3212/aston-project/blob/main/src/components/Layout.tsx)
 - Есть применение предохранителя ✅ [**Предохранитель**](https://github.com/Kirill3212/aston-project/blob/main/src/components/ErrorBoundary.tsx) [**его использование**](https://github.com/Kirill3212/aston-project/blob/main/src/routing/router.tsx)
 - Есть хотя бы один кастомный хук ✅ [**useCheckIfIsLikedAndAddToFavorites**](https://github.com/Kirill3212/aston-project/blob/main/src/hooks/useCheckIfIsLikedAndAddToFavorites.ts)
 - Хотя бы несколько компонентов используют PropTypes ✅ [**Пример использования**](https://github.com/Kirill3212/aston-project/blob/main/src/components/cards/PokemonCardSearch.tsx)
