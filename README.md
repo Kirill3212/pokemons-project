@@ -20,7 +20,7 @@ Let's have an amazing experience by discovering and catching some of the pokemon
 
 ![My Image](readmeImgs/SingleCardPage.png)
 
-`-------------------------------------------------------------------`
+---
 
 ### React
 
