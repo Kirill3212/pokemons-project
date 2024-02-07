@@ -46,7 +46,6 @@ const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
     isFetching,
   } = useGetPokemonByNameOrIdQuery(debouncedSearchInput || null);
 
-  // Update the first input received from home page
   useEffect(() => {
     if (pokemon && !isLoading && !isFetching && !isError) {
       dispatch(updateHistory(pokemon));
