@@ -4,9 +4,9 @@ The Pokémon world is a astonishing and vibrant place, inhabited by a lot of coo
 
 Let's have an amazing experience by discovering and catching some of the pokemons 🙂
 
----
-
 Creation of this app was possible because of this amazing [**_API_**](https://pokeapi.co/)
+
+---
 
 ## Have your first encounter with Pokémon World
 
