@@ -10,6 +10,7 @@ import { SinglePokemonData } from "../../types/pokemonData";
 import HistoryHeader from "./HistoryHeader";
 
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 import { useAppSelector } from "../../hooks";
 import { useAppDispatch } from "../../hooks";
@@ -47,29 +48,30 @@ const History = () => {
               justifyContent={"center"}
             >
               {uniqueHistory.map((item: SinglePokemonData, index) => (
-                <Text
-                  key={index}
-                  ml={2}
-                  mr={2}
-                  cursor={"pointer"}
-                  transition={"0.3s"}
-                  _hover={{ color: "yellow.400" }}
-                  onClick={() =>
-                    navigate("/SingleCard", {
-                      state: { data: item, invokePage: "History" },
-                    })
-                  }
-                >
-                  {item.name}{" "}
+                <Link key={index} to={`/SingleCard/${item.id}`}>
                   <Text
-                    as={"span"}
-                    color={"blue.500"}
+                    ml={2}
+                    mr={2}
+                    cursor={"pointer"}
                     transition={"0.3s"}
                     _hover={{ color: "yellow.400" }}
+                    onClick={() =>
+                      navigate("/SingleCard", {
+                        state: { data: item, invokePage: "History" },
+                      })
+                    }
                   >
-                    (Index: {item.id})
+                    {item.name}{" "}
+                    <Text
+                      as={"span"}
+                      color={"blue.500"}
+                      transition={"0.3s"}
+                      _hover={{ color: "yellow.400" }}
+                    >
+                      (Index: {item.id})
+                    </Text>
                   </Text>
-                </Text>
+                </Link>
               ))}
             </Flex>
             {uniqueHistory.length ? (
