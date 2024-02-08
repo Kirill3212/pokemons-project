@@ -38,6 +38,7 @@ export const router = createBrowserRouter(
       <Route path="/SignIn" element={<SignIn />} />
       <Route path="/SignUp" element={<SignUp />} />
       <Route path="/Search" element={<Search />} />
+      <Route path="/SingleCard/:id" element={<SingleCard />} />
 
       <Route
         path="/Favorites"
@@ -53,15 +54,6 @@ export const router = createBrowserRouter(
         element={
           <PrivateRoute>
             <History />
-          </PrivateRoute>
-        }
-      />
-
-      <Route
-        path="/SingleCard"
-        element={
-          <PrivateRoute>
-            <SingleCard />
           </PrivateRoute>
         }
       />

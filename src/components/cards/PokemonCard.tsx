@@ -9,7 +9,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import pokeballHeartActive from "../../assets/pokeballHeartActive.png";
 import pokeballHeartNotActive from "../../assets/pokeballHeartNotActive.png";
@@ -17,8 +17,6 @@ import pokeballHeartNotActive from "../../assets/pokeballHeartNotActive.png";
 import { SinglePokemonResponse } from "../../types/pokemonData";
 
 import { useAppSelector } from "../../hooks";
-
-import { useShowToast } from "../../hooks/useShowToast";
 
 import { useCheckIfIsLikedAndAddToFavorites } from "../../hooks/useCheckIfIsLikedAndAddToFavorites";
 
@@ -33,21 +31,13 @@ interface PokemonCardProps {
   invokedPage: string;
 }
 
-const PokemonCard = ({ pokemonData, invokedPage }: PokemonCardProps) => {
+const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
   const isAuthorized = useAppSelector(getAuthStatusSelector);
-  const navigate = useNavigate();
-  const toast = useShowToast();
   const { isLiked, checkIfIsLiked, handleAddToFavorites } =
     useCheckIfIsLikedAndAddToFavorites();
 
   const pokemonId = getPokemonId(pokemonData.url);
   const { data: pokemon } = useGetPokemonByNameOrIdQuery(pokemonId);
-
-  // Data to SinglePage
-  const dataToPass = {
-    data: pokemon,
-    invokePage: invokedPage,
-  };
 
   useEffect(() => {
     if (isAuthorized) checkIfIsLiked(pokemon);
@@ -110,16 +100,9 @@ const PokemonCard = ({ pokemonData, invokedPage }: PokemonCardProps) => {
               mt={4}
               mb={4}
             ></Image>
-            <Button
-              w={"100%"}
-              onClick={() =>
-                isAuthorized
-                  ? navigate("/SingleCard", { state: dataToPass })
-                  : toast("Sorry :(", "Need to sign in", "error")
-              }
-            >
-              Show more
-            </Button>
+            <Link to={`/SingleCard/${pokemon.id}`}>
+              <Button w={"100%"}>Show more</Button>
+            </Link>
           </>
         </GridItem>
       )}
