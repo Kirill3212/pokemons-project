@@ -9,7 +9,7 @@ import {
   deleteFromFavorites,
 } from "../store/slices/favoritesSlice";
 
- export const useCheckIfIsLikedAndAddToFavorites = () => {
+export const useCheckIfIsLikedAndAddToFavorites = () => {
     const [isLiked, setIsLiked] = useState(false) 
     const isAuthorized = useAppSelector(getAuthStatusSelector);
     const favoritePokemons = useAppSelector(getFavoritesSelector);
@@ -35,4 +35,4 @@ import {
     }
 
     return {isLiked, checkIfIsLiked, handleAddToFavorites}
-  };
+};

@@ -12,6 +12,8 @@ import {
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import pokeballHeartActive from "../../assets/pokeballHeartActive.png";
 
+import { Link } from "react-router-dom";
+
 import PokemonCard from "../cards/PokemonCard";
 
 import { SinglePokemonResponse } from "../../types/pokemonData";
@@ -52,19 +54,22 @@ const PokemonSuggestionsCardsList = ({
             justifyContent={{ base: "center", md: "left", lg: "left" }}
             width={"100%"}
           >
-            <Flex
-              alignItems={"center"}
-              cursor={"pointer"}
-              color={"red.400"}
-              transition={"0.2s"}
-              _hover={{ color: "red.600" }}
-            >
-              <ArrowBackIcon />
-              <Text onClick={() => window.location.reload()} ml={1}>
-                Back to Suggestions
-              </Text>
-            </Flex>
+            <Link to=".">
+              <Flex
+                alignItems={"center"}
+                cursor={"pointer"}
+                color={"red.400"}
+                transition={"0.2s"}
+                _hover={{ color: "red.600" }}
+              >
+                <ArrowBackIcon />
+                <Text onClick={() => window.location.reload()} ml={1}>
+                  Back to Suggestions
+                </Text>
+              </Flex>
+            </Link>
           </Flex>
+
           <Grid
             mt={3}
             gap={2}

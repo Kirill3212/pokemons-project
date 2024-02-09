@@ -11,31 +11,28 @@ import SingleCardStats from "./SingleCardStats";
 import SingleCardAttacks from "./SingleCardAttacks";
 import SingleCardKitty from "./SingleCardKitty";
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 
 import { useAppSelector } from "../../hooks";
 
 import { getAuthStatusSelector } from "../../store/slices/userSlice";
 
+import { useGetPokemonByNameOrIdQuery } from "../../api/api";
+
 import { useCheckIfIsLikedAndAddToFavorites } from "../../hooks/useCheckIfIsLikedAndAddToFavorites";
 
 const SingleCard = () => {
-  const location = useLocation();
   const isAuthorized = useAppSelector(getAuthStatusSelector);
-  const navigate = useNavigate();
   const { isLiked, checkIfIsLiked, handleAddToFavorites } =
     useCheckIfIsLikedAndAddToFavorites();
-
-  // Data of Pokemon Sender (PokemonCard, PokemonCardSearch, PokemonFavoriteCard, From History Search)
-  const pokemon = location.state?.data;
-  const invokedPage = location.state?.invokePage;
+  const { id } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { data: pokemon } = useGetPokemonByNameOrIdQuery(id);
 
   useEffect(() => {
     if (isAuthorized) {
       checkIfIsLiked(pokemon);
-      if (!pokemon) {
-        navigate("/NotFound");
-      }
     }
   });
 
@@ -63,15 +60,13 @@ const SingleCard = () => {
               color={"red.400"}
               transition={"0.2s"}
               _hover={{ color: "red.600" }}
-              onClick={() =>
-                navigate(invokedPage == "Home" ? "/" : "/" + invokedPage)
-              }
+              onClick={() => navigate(-1)}
             >
               <ArrowBackIcon mr={2} />
               <Text>
-                {invokedPage === "Home"
-                  ? `Back ${invokedPage}`
-                  : `Back to ${invokedPage}`}
+                {location.state === "Home" || location.state == null
+                  ? `Back Home`
+                  : `Back to ${location.state}`}
               </Text>
             </Flex>
             <SingleCardKitty />

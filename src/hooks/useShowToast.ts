@@ -5,7 +5,7 @@ export const useShowToast = () => {
   const toast = useToast();
 
   const showToast = useCallback(
-    (title: string, description:string, status:any) => {
+    (title: string, description:string, status: 'error' | 'success') => {
       toast({
         title: title,
         description: description,

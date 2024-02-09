@@ -50,7 +50,7 @@ const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
     if (pokemon && !isLoading && !isFetching && !isError) {
       dispatch(updateHistory(pokemon));
     }
-  });
+  }, []);
 
   const handleSearch = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { GridItem, Image, Heading, Button, Box } from "@chakra-ui/react";
 import { IoMdCloseCircle } from "react-icons/io";
 
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks";
 import { deleteFromFavorites } from "../../store/slices/favoritesSlice";
 import { SinglePokemonData } from "../../types/pokemonData";
@@ -14,12 +14,6 @@ interface PokemonFavoriteCardProps {
 const PokemonFavoriteCard = ({ pokemon }: PokemonFavoriteCardProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  // Data to SinglePage
-  const dataToPass = {
-    data: pokemon,
-    invokePage: "Favorites",
-  };
 
   return (
     <GridItem
@@ -58,12 +52,13 @@ const PokemonFavoriteCard = ({ pokemon }: PokemonFavoriteCardProps) => {
       >
         {pokemon.name}
       </Heading>
-
       <Button
+        onClick={() =>
+          navigate(`/SingleCard/${pokemon.id}`, { state: "Favorites" })
+        }
         w={"100%"}
         mt={3}
         size={"sm"}
-        onClick={() => navigate("/SingleCard", { state: dataToPass })}
       >
         Show more
       </Button>

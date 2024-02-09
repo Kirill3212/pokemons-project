@@ -18,8 +18,6 @@ import { SinglePokemonResponse } from "../../types/pokemonData";
 
 import { useAppSelector } from "../../hooks";
 
-import { useShowToast } from "../../hooks/useShowToast";
-
 import { useCheckIfIsLikedAndAddToFavorites } from "../../hooks/useCheckIfIsLikedAndAddToFavorites";
 
 import { getAuthStatusSelector } from "../../store/slices/userSlice";
@@ -33,21 +31,14 @@ interface PokemonCardProps {
   invokedPage: string;
 }
 
-const PokemonCard = ({ pokemonData, invokedPage }: PokemonCardProps) => {
+const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
   const isAuthorized = useAppSelector(getAuthStatusSelector);
-  const navigate = useNavigate();
-  const toast = useShowToast();
   const { isLiked, checkIfIsLiked, handleAddToFavorites } =
     useCheckIfIsLikedAndAddToFavorites();
+  const navigate = useNavigate();
 
   const pokemonId = getPokemonId(pokemonData.url);
   const { data: pokemon } = useGetPokemonByNameOrIdQuery(pokemonId);
-
-  // Data to SinglePage
-  const dataToPass = {
-    data: pokemon,
-    invokePage: invokedPage,
-  };
 
   useEffect(() => {
     if (isAuthorized) checkIfIsLiked(pokemon);
@@ -113,9 +104,7 @@ const PokemonCard = ({ pokemonData, invokedPage }: PokemonCardProps) => {
             <Button
               w={"100%"}
               onClick={() =>
-                isAuthorized
-                  ? navigate("/SingleCard", { state: dataToPass })
-                  : toast("Sorry :(", "Need to sign in", "error")
+                navigate(`/SingleCard/${pokemon.id}`, { state: "Home" })
               }
             >
               Show more
