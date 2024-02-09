@@ -9,7 +9,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import pokeballHeartActive from "../../assets/pokeballHeartActive.png";
 import pokeballHeartNotActive from "../../assets/pokeballHeartNotActive.png";
@@ -35,6 +35,7 @@ const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
   const isAuthorized = useAppSelector(getAuthStatusSelector);
   const { isLiked, checkIfIsLiked, handleAddToFavorites } =
     useCheckIfIsLikedAndAddToFavorites();
+  const navigate = useNavigate();
 
   const pokemonId = getPokemonId(pokemonData.url);
   const { data: pokemon } = useGetPokemonByNameOrIdQuery(pokemonId);
@@ -100,9 +101,14 @@ const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
               mt={4}
               mb={4}
             ></Image>
-            <Link to={`/SingleCard/${pokemon.id}`}>
-              <Button w={"100%"}>Show more</Button>
-            </Link>
+            <Button
+              w={"100%"}
+              onClick={() =>
+                navigate(`/SingleCard/${pokemon.id}`, { state: "Home" })
+              }
+            >
+              Show more
+            </Button>
           </>
         </GridItem>
       )}

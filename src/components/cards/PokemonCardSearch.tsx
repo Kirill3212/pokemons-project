@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { Image, Heading, Button, Flex, Text } from "@chakra-ui/react";
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import pokeballHeartActive from "../../assets/pokeballHeartActive.png";
 import pokeballHeartNotActive from "../../assets/pokeballHeartNotActive.png";
@@ -25,6 +25,7 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
   const isAuthorized = useAppSelector(getAuthStatusSelector);
   const { isLiked, checkIfIsLiked, handleAddToFavorites } =
     useCheckIfIsLikedAndAddToFavorites();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isAuthorized) {
@@ -109,11 +110,15 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
           </Text>
           <Text ml={2}>{pokemon.weight}</Text>
         </Flex>
-        <Link to={`/SingleCard/${pokemon.id}`}>
-          <Button mt={{ base: 3, md: 0, lg: 0 }} w={"100%"}>
-            Show more
-          </Button>
-        </Link>
+        <Button
+          mt={{ base: 3, md: 0, lg: 0 }}
+          w={"100%"}
+          onClick={() =>
+            navigate(`/SingleCard/${pokemon.id}`, { state: "Search" })
+          }
+        >
+          Show more
+        </Button>
       </Flex>
     </Flex>
   );

@@ -10,7 +10,6 @@ import { SinglePokemonData } from "../../types/pokemonData";
 import HistoryHeader from "./HistoryHeader";
 
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
 
 import { useAppSelector } from "../../hooks";
 import { useAppDispatch } from "../../hooks";
@@ -48,30 +47,28 @@ const History = () => {
               justifyContent={"center"}
             >
               {uniqueHistory.map((item: SinglePokemonData, index) => (
-                <Link key={index} to={`/SingleCard/${item.id}`}>
+                <Text
+                  ml={2}
+                  mr={2}
+                  cursor={"pointer"}
+                  transition={"0.3s"}
+                  _hover={{ color: "yellow.400" }}
+                  onClick={() =>
+                    navigate(`/SingleCard/${item.id}`, {
+                      state: "History",
+                    })
+                  }
+                >
+                  {item.name}{" "}
                   <Text
-                    ml={2}
-                    mr={2}
-                    cursor={"pointer"}
+                    as={"span"}
+                    color={"blue.500"}
                     transition={"0.3s"}
                     _hover={{ color: "yellow.400" }}
-                    onClick={() =>
-                      navigate("/SingleCard", {
-                        state: { data: item, invokePage: "History" },
-                      })
-                    }
                   >
-                    {item.name}{" "}
-                    <Text
-                      as={"span"}
-                      color={"blue.500"}
-                      transition={"0.3s"}
-                      _hover={{ color: "yellow.400" }}
-                    >
-                      (Index: {item.id})
-                    </Text>
+                    (Index: {item.id})
                   </Text>
-                </Link>
+                </Text>
               ))}
             </Flex>
             {uniqueHistory.length ? (

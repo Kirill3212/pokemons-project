@@ -11,7 +11,7 @@ import SingleCardStats from "./SingleCardStats";
 import SingleCardAttacks from "./SingleCardAttacks";
 import SingleCardKitty from "./SingleCardKitty";
 
-import { useParams, Link } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 
 import { useAppSelector } from "../../hooks";
 
@@ -26,8 +26,10 @@ const SingleCard = () => {
   const { isLiked, checkIfIsLiked, handleAddToFavorites } =
     useCheckIfIsLikedAndAddToFavorites();
   const { id } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
   const { data: pokemon } = useGetPokemonByNameOrIdQuery(id);
-
+  console.log(location);
   useEffect(() => {
     if (isAuthorized) {
       checkIfIsLiked(pokemon);
@@ -52,18 +54,21 @@ const SingleCard = () => {
             justifyContent={"space-between"}
             mb={"-14px"}
           >
-            <Link to="..">
-              <Flex
-                alignItems={"center"}
-                cursor={"pointer"}
-                color={"red.400"}
-                transition={"0.2s"}
-                _hover={{ color: "red.600" }}
-              >
-                <ArrowBackIcon mr={2} />
-                <Text>Back</Text>
-              </Flex>
-            </Link>
+            <Flex
+              alignItems={"center"}
+              cursor={"pointer"}
+              color={"red.400"}
+              transition={"0.2s"}
+              _hover={{ color: "red.600" }}
+              onClick={() => navigate(-1)}
+            >
+              <ArrowBackIcon mr={2} />
+              <Text>
+                {location.state === "Home"
+                  ? `Back ${location.state}`
+                  : `Back to ${location.state}`}
+              </Text>
+            </Flex>
             <SingleCardKitty />
           </Flex>
           <Flex
