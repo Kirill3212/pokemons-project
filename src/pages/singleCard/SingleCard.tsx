@@ -64,8 +64,8 @@ const SingleCard = () => {
             >
               <ArrowBackIcon mr={2} />
               <Text>
-                {location.state === "Home"
-                  ? `Back ${location.state}`
+                {location.state === "Home" || location.state == null
+                  ? `Back Home`
                   : `Back to ${location.state}`}
               </Text>
             </Flex>
