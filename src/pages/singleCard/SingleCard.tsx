@@ -29,7 +29,7 @@ const SingleCard = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { data: pokemon } = useGetPokemonByNameOrIdQuery(id);
-  console.log(location);
+
   useEffect(() => {
     if (isAuthorized) {
       checkIfIsLiked(pokemon);

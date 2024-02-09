@@ -50,6 +50,7 @@ const History = () => {
                 <Text
                   ml={2}
                   mr={2}
+                  key={index}
                   cursor={"pointer"}
                   transition={"0.3s"}
                   _hover={{ color: "yellow.400" }}
