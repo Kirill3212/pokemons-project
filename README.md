@@ -1,6 +1,6 @@
 # Pokémons
 
-The Pokémon world is a astonishing and vibrant place, inhabited by a lot of cool creatures, which you can capture and train for various purposes such as companionship or battles.
+The Pokémon world is an astonishing and vibrant place, inhabited by a lot of cool creatures, which you can capture and train for various purposes such as companionship or battles.
 
 Let's have an amazing experience by discovering and catching some of the pokemons 🙂
 
