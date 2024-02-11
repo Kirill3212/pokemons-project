@@ -31,7 +31,7 @@ const PokemonCardSearch = ({ pokemon }: PokemonCardSearchProps) => {
     if (isAuthorized) {
       checkIfIsLiked(pokemon);
     }
-  });
+  }, []);
 
   return (
     <Flex
