@@ -28,7 +28,7 @@ import PokemonCardSearch from "./cards/PokemonCardSearch";
 
 const SearchBarAndDisplay = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchQuery = searchParams.get("pok");
+  const searchQuery = searchParams.get("text");
 
   const [searchInput, setSearchInput] = useState(searchQuery || "");
   const debouncedSearchInput = useDebounce(searchInput, 500);
