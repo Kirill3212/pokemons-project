@@ -35,7 +35,7 @@ const SearchBarHomePage = () => {
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate("/Search", { state: searchInput });
+    navigate("/Search?pok=" + searchInput);
   };
 
   useEffect(() => {

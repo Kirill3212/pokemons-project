@@ -16,6 +16,8 @@ import loadingSearch from "../assets/loadingSearch.gif";
 
 import { useGetPokemonByNameOrIdQuery } from "../api/api";
 
+import { useSearchParams } from "react-router-dom";
+
 import { updateHistory } from "../store/slices/historySlice";
 import { useAppDispatch } from "../hooks";
 
@@ -24,18 +26,11 @@ import { useDebounce } from "../hooks/useDebounce";
 import SearchPageSuggestions from "./SearchPageSuggestions";
 import PokemonCardSearch from "./cards/PokemonCardSearch";
 
-interface SearchBarProps {
-  homeInputSearch: {
-    hash: string;
-    key: string;
-    pathname: string;
-    search: string;
-    state: string;
-  };
-}
+const SearchBarAndDisplay = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get("pok");
 
-const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
-  const [searchInput, setSearchInput] = useState(homeInputSearch.state || "");
+  const [searchInput, setSearchInput] = useState(searchQuery || "");
   const debouncedSearchInput = useDebounce(searchInput, 500);
   const dispatch = useAppDispatch();
 
@@ -55,6 +50,8 @@ const SearchBarAndDisplay = ({ homeInputSearch }: SearchBarProps) => {
   const handleSearch = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchInput(searchInput);
+    setSearchParams({ text: searchInput });
+
     if (!isError && !isLoading && !isFetching && pokemon) {
       dispatch(updateHistory(pokemon));
     }
