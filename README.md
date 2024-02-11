@@ -37,7 +37,7 @@ Creation of this app was possible because of this amazing [**_API_**](https://po
 - Есть хотя бы один кастомный хук ✅ [**useCheckIfIsLikedAndAddToFavorites**](https://github.com/Kirill3212/aston-project/blob/main/src/hooks/useCheckIfIsLikedAndAddToFavorites.ts)
 - Хотя бы несколько компонентов используют PropTypes ✅ [**Пример использования**](https://github.com/Kirill3212/aston-project/blob/main/src/components/cards/PokemonCardSearch.tsx)
 - Поиск не должен триггерить много запросов к серверу ✅ Реализовао с помощью кастомного хука [**useDebounce**](https://github.com/Kirill3212/aston-project/blob/main/src/hooks/useDebounce.ts) - [**Пример использования**](https://github.com/Kirill3212/aston-project/blob/main/src/components/SearchBarAndDisplay.tsx)
-- Есть применение lazy + Suspense ✅[**Пример использования**](https://github.com/Kirill3212/aston-project/blob/main/src/routing/router.tsx)
+- Есть применение lazy + Suspense ✅ [**Пример использования**](https://github.com/Kirill3212/aston-project/blob/main/src/routing/router.tsx)
 
 ### Redux
 
