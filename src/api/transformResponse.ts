@@ -24,6 +24,10 @@ export function transformSinglePokemon(
         version_group_details: string;
       }) => move.move.name
     ),
+    cries: {
+      latest: responseData.cries.latest,
+      legacy: responseData.cries.legacy,
+    },
     // Images
     mainImage: responseData.sprites.other.dream_world.front_default,
     backupImage: responseData.sprites.front_default,

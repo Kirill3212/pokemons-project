@@ -15,6 +15,7 @@ export interface SinglePokemonCardResponse {
   id: number;
   is_default: boolean;
   location_area_encounter: string;
+  cries: TPokemonCries;
   moves: [];
   name: string;
   order: number;
@@ -48,6 +49,7 @@ export interface SinglePokemonData {
   weight: number;
   name: string;
   type: string[];
+  cries: TPokemonCries;
   // Images
   mainImage: string;
   backupImage: string;
@@ -62,6 +64,12 @@ export type TGeneration = BaseResponse;
 
 // Move Damage Class
 export type TMoveDamageClass = BaseResponse;
+
+// Cries
+export type TPokemonCries = {
+  latest: string;
+  legacy: string;
+};
 
 // Damage Relations
 export type TDamageRelations = {

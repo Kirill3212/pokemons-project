@@ -12,13 +12,13 @@ const SingleCardAttacks = ({ pokemon }: SingleCardAttacksProps) => {
   const [attackPosition, setAttackPosition] = useState(0);
 
   const changeAttackForwards = () => {
-    let next = attackPosition;
+    const next = attackPosition;
     if (next >= pokemon.attacks.length - 1) {
       setAttackPosition(0);
     } else setAttackPosition(next + 1);
   };
   const changeAttackBackwards = () => {
-    let prev = attackPosition;
+    const prev = attackPosition;
     if (prev <= 0) {
       setAttackPosition(pokemon.attacks.length - 1);
     } else setAttackPosition(prev - 1);
@@ -37,7 +37,7 @@ const SingleCardAttacks = ({ pokemon }: SingleCardAttacksProps) => {
         justifyContent={"space-around"}
         alignItems={"center"}
         width={"100%"}
-        bg={"purple.600"}
+        bg={"gray.800"}
         borderRadius={6}
       >
         <ArrowLeftIcon
