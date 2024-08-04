@@ -1,16 +1,16 @@
 import { Flex, Image, IconButton } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import logo from "../assets/logo.png";
+import logo from "@/assets/logo.png";
 
-import GuestNavbar from "./navbar/GuestNavbar";
-import UserNavbar from "./navbar/UserNavbar";
+import GuestNavbar from "@/components/navbar/GuestNavbar";
+import UserNavbar from "@/components/navbar/UserNavbar";
 
 import { Link } from "react-router-dom";
 
-import changeTheme from "../utils/changeTheme";
+import changeTheme from "@/utils/changeTheme";
 
-import { getAuthStatusSelector } from "../store/slices/userSlice";
-import { useAppSelector } from "../hooks";
+import { getAuthStatusSelector } from "@/store/slices/userSlice";
+import { useAppSelector } from "@/hooks";
 
 const Header = () => {
   const userIn = useAppSelector(getAuthStatusSelector);

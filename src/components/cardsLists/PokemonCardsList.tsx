@@ -42,10 +42,14 @@ const PokemonCardsList = () => {
       >
         {isLoading && (
           <>
-            <Skeleton height={"325px"} width={"230px"} borderRadius={10} />
-            <Skeleton height={"325px"} width={"230px"} borderRadius={10} />
-            <Skeleton height={"325px"} width={"230px"} borderRadius={10} />
-            <Skeleton height={"325px"} width={"230px"} borderRadius={10} />
+            {[1, 2, 3, 4].map((el) => (
+              <Skeleton
+                height={"325px"}
+                width={"230px"}
+                borderRadius={10}
+                key={el}
+              />
+            ))}
           </>
         )}
 
