@@ -1,7 +1,9 @@
-export interface SinglePokemonResponse {
+export type BaseResponse = {
   name: string;
   url: string;
-}
+};
+
+export type SinglePokemonResponse = BaseResponse;
 
 export interface SinglePokemonCardResponse {
   abilities: [];
@@ -18,7 +20,7 @@ export interface SinglePokemonCardResponse {
   order: number;
   past_abilities: [];
   past_types: [];
-  species: object;
+  species: TSpecies;
   sprites: TSprites;
   stats: [];
   types: [];
@@ -26,11 +28,11 @@ export interface SinglePokemonCardResponse {
 }
 
 export interface PokemonTypeResponse {
-  damage_relations: object;
+  damage_relations: TDamageRelations;
   game_indices: [];
-  generation: object;
+  generation: TGeneration;
   id: number;
-  move_damage_class: object;
+  move_damage_class: TMoveDamageClass;
   moves: [];
   name: string;
   names: object;
@@ -51,6 +53,25 @@ export interface SinglePokemonData {
   backupImage: string;
   animatedImage: string;
 }
+
+// Species
+export type TSpecies = BaseResponse;
+
+// Generation
+export type TGeneration = BaseResponse;
+
+// Move Damage Class
+export type TMoveDamageClass = BaseResponse;
+
+// Damage Relations
+export type TDamageRelations = {
+  double_damage_from: BaseResponse[];
+  double_damage_to: [];
+  half_damage_from: [];
+  half_damage_to: BaseResponse[];
+  no_damage_from: BaseResponse[];
+  no_damage_to: BaseResponse[];
+};
 
 // Sprites
 export type TSprites = {

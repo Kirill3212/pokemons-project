@@ -7,6 +7,8 @@ import {
   Text,
   Tooltip,
   VStack,
+  Spinner,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { TbBulb } from "react-icons/tb";
@@ -43,7 +45,7 @@ const SearchBarHomePage = () => {
       setErrorMessage("Not found, need to specify full name or id");
       const timeoutId = setTimeout(() => {
         setErrorMessage("");
-      }, 3000);
+      }, 2300);
 
       return () => clearTimeout(timeoutId);
     }
@@ -54,16 +56,20 @@ const SearchBarHomePage = () => {
       <Flex width={{ base: "300px", md: "400px", lg: "500px" }} mt={5}>
         <form onSubmit={handleSearch} style={{ width: "100%" }}>
           <InputGroup>
-            <InputLeftElement
-              pointerEvents="none"
-              children={<SearchIcon color="gray.300" />}
-            />
+            <InputLeftElement pointerEvents="none">
+              <SearchIcon color="gray.300" />
+            </InputLeftElement>
             <Input
               type="text"
               placeholder="Search your pokemon"
               focusBorderColor="yellow.300"
               onChange={(e) => setSearchInput(e.target.value)}
             />
+            <InputRightElement pointerEvents="none">
+              {searchInput && searchInput !== debouncedSearchInput && (
+                <Spinner color="gray.300" size={"xs"} />
+              )}
+            </InputRightElement>
           </InputGroup>
           <Flex
             width={"100%"}
@@ -73,16 +79,10 @@ const SearchBarHomePage = () => {
             mt={1}
           >
             <Flex>
-              {isLoading || isFetching ? (
-                <Text fontSize={"13px"} ml={2}>
-                  Loading...
+              {isError && (
+                <Text fontSize={"13px"} color={"red.700"} ml={2}>
+                  {errorMessage}
                 </Text>
-              ) : (
-                !pokemon && (
-                  <Text fontSize={"13px"} color={"red.700"} ml={2}>
-                    {errorMessage}
-                  </Text>
-                )
               )}
             </Flex>
             <Flex cursor={"pointer"}>
@@ -100,7 +100,9 @@ const SearchBarHomePage = () => {
         </form>
       </Flex>
       <VStack>
-        {(!pokemon || isError || isFetching) && <PokemonCardsList />}
+        {(!pokemon || isError || (isFetching && !isFetching)) && (
+          <PokemonCardsList />
+        )}
         {pokemon && !isError && !isLoading && !isFetching && (
           <Flex mt={8}>
             <PokemonCardSearch pokemon={pokemon} />

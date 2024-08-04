@@ -62,10 +62,9 @@ const SearchBarAndDisplay = () => {
       <Flex width={{ base: "300px", md: "400px", lg: "500px" }} mt={5}>
         <form onSubmit={handleSearch} style={{ width: "100%" }}>
           <InputGroup>
-            <InputLeftElement
-              pointerEvents="none"
-              children={<SearchIcon color="gray.300" />}
-            />
+            <InputLeftElement pointerEvents="none">
+              <SearchIcon color="gray.300" />
+            </InputLeftElement>
             <Input
               type="text"
               value={searchInput}
@@ -84,10 +83,14 @@ const SearchBarAndDisplay = () => {
             <Text
               fontSize={"13px"}
               color={"red.700"}
-              visibility={isError ? "visible" : "hidden"}
+              visibility={
+                isError && searchInput && debouncedSearchInput
+                  ? "visible"
+                  : "hidden"
+              }
               ml={2}
             >
-              Sorry, can't find this pokemon
+              {`Sorry, can't find this pokemon`}
             </Text>
             <Flex cursor={"pointer"}>
               <Tooltip
