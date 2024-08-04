@@ -31,8 +31,22 @@ const Footer = () => {
           </a>
         </ListItem>
         <ListItem>
-          <a href="https://t.me/pink_Fairy_je" target="blank">
+          <a href="https://t.me/kir_55_1" target="blank">
             Telegram
+          </a>
+        </ListItem>
+        <ListItem>
+          <a
+            style={{
+              color: "gray",
+              background:
+                "linear-gradient(to right, #ff0000, #ffff00, #00ff00)",
+              backgroundClip: "text",
+            }}
+            href="/Developer"
+            target="blank"
+          >
+            Developer
           </a>
         </ListItem>
       </UnorderedList>

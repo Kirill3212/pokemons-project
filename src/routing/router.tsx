@@ -10,6 +10,7 @@ import ErrorBoundary from "../components/ErrorBoundary";
 import Layout from "../components/Layout";
 import Loading from "../components/Loading";
 import { PrivateRoute } from "./privateRoute";
+import Developer from "@/pages/developer/Developer";
 
 // Pages
 const Home = lazy(() => import("../pages/Home"));
@@ -39,6 +40,7 @@ export const router = createBrowserRouter(
       <Route path="/SignUp" element={<SignUp />} />
       <Route path="/Search" element={<Search />} />
       <Route path="/SingleCard/:id" element={<SingleCard />} />
+      <Route path="/Developer" element={<Developer />} />
 
       <Route
         path="/Favorites"
