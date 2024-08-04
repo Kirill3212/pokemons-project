@@ -27,6 +27,7 @@ const SingleCardImage = ({ pokemon }: SingleCardImageProps) => {
       boxSize={{ base: "150px", md: "180px", lg: "200px" }}
       justifyContent={"center"}
       alignItems={"center"}
+      position={"relative"}
     >
       <Image
         src={
@@ -44,8 +45,8 @@ const SingleCardImage = ({ pokemon }: SingleCardImageProps) => {
       <Flex
         onClick={handlePlayCry}
         position={"absolute"}
-        top={"110px"}
-        right={"210px"}
+        top={"25px"}
+        right={"15px"}
       >
         {cry && <audio src={pokemon.cries.latest} autoPlay={true} />}
         <Text
