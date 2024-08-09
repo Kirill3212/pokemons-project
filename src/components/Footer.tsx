@@ -44,7 +44,6 @@ const Footer = () => {
               backgroundClip: "text",
             }}
             href="/Developer"
-            target="blank"
           >
             Developer
           </a>

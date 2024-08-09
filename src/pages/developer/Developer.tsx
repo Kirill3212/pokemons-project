@@ -1,4 +1,12 @@
-import { VStack, Flex, Text, Divider } from "@chakra-ui/react";
+import {
+  VStack,
+  Flex,
+  Text,
+  Divider,
+  Image,
+  keyframes,
+  Box,
+} from "@chakra-ui/react";
 import { IoLogoJavascript } from "react-icons/io5";
 import { BiLogoTypescript } from "react-icons/bi";
 import { IoLogoSass } from "react-icons/io5";
@@ -18,11 +26,26 @@ import { FaFigma } from "react-icons/fa";
 import { SiChakraui } from "react-icons/si";
 import { FaConfluence } from "react-icons/fa";
 
+import me from "@/assets/meClose.jpg";
+import fire from "@/assets/fire.gif";
+
 const Developer = () => {
+  const rotate = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+`;
+
   return (
-    <VStack gap={"10px"} mt={"40px"}>
+    <VStack gap={"10px"} mt={"-40px"}>
+      <Text fontSize="xl" color={"pink.400"}>
+        About me
+      </Text>
+      <Text>
+        I am a frontend developer with a <strong>2+ years</strong> of experience
+      </Text>
+
       <Divider width={"34%"} borderColor={"pink.400"} />
-      <Flex gap={"10px"}>
+      <Flex gap={"10px"} mb={"20px"}>
         <Text fontSize="m" color={"grey"}>
           Skills:
         </Text>
@@ -48,12 +71,26 @@ const Developer = () => {
         </Flex>
       </Flex>
 
-      <Text fontSize="xl" color={"pink.400"}>
-        About me
-      </Text>
-      <Text>I am a frontend developer with a 2+ yeats of experience</Text>
+      {/* VARIANT 1 */}
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        width={"100%"}
+        gap={"150px"}
+      >
+        <Image src={fire} boxSize="300px" />
+        <Image
+          src={me}
+          alt="me :)"
+          width={"23%"}
+          mt={"60px"}
+          animation={`${rotate} infinite 1.5s linear`}
+        />
+        <Image src={fire} boxSize="300px" />
+      </Box>
 
-      <Text fontSize="xl" color={"pink.400"}>
+      {/* VARIANT 2 */}
+      {/* <Text fontSize="xl" color={"pink.400"}>
         Knowledge and Skills
       </Text>
       <VStack alignItems={"left"}>
@@ -84,7 +121,7 @@ const Developer = () => {
       <VStack>
         <Text>English C1</Text>
         <Text>Spanish A2</Text>
-      </VStack>
+      </VStack> */}
 
       {/* <ol style={{ marginTop: "20px", marginLeft: "15px" }}>
         <li>Add accordion chakra with questions</li>
