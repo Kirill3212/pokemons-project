@@ -9,7 +9,7 @@ import pokeballHeartActive from "../../assets/pokeballHeartActive.png";
 import SingleCardImage from "./SingleCardImage";
 import SingleCardStats from "./SingleCardStats";
 import SingleCardAttacks from "./SingleCardAttacks";
-// import SingleCardKitty from "./SingleCardKitty";
+import SingleCardKitty from "./SingleCardKitty";
 
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 
@@ -70,7 +70,7 @@ const SingleCard = () => {
                   : `Back to ${location.state}`}
               </Text>
             </Flex>
-            {/* <SingleCardKitty /> */}
+            <SingleCardKitty />
           </Flex>
           <Flex
             boxShadow={"0px 0px 3px grey"}
