@@ -3,10 +3,12 @@ import {
   Flex,
   Text,
   Divider,
-  Image,
-  keyframes,
-  Box,
+  // Image,
+  // keyframes,
 } from "@chakra-ui/react";
+import { css, useTheme } from "@emotion/react";
+
+// Icons
 import { IoLogoJavascript } from "react-icons/io5";
 import { BiLogoTypescript } from "react-icons/bi";
 import { IoLogoSass } from "react-icons/io5";
@@ -26,17 +28,27 @@ import { FaFigma } from "react-icons/fa";
 import { SiChakraui } from "react-icons/si";
 import { FaConfluence } from "react-icons/fa";
 
-import me from "@/assets/meClose.jpg";
-import fire from "@/assets/fire.gif";
+// import me from "@/assets/meClose.jpg";
+// import fire from "@/assets/fire.gif";
 
 const Developer = () => {
-  const rotate = keyframes`
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-`;
+  //   const rotate = keyframes`
+  //   from { transform: rotate(0deg); }
+  //   to { transform: rotate(360deg); }
+  // `;
+
+  const theme = useTheme();
+
+  const iconStyle = css`
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      color: ${theme.colors.pink[500]};
+    }
+  `;
 
   return (
-    <VStack gap={"10px"} mt={"-40px"}>
+    <VStack gap={"10px"} /* mt={"-40px"} */ mt={"120px"}>
       <Text fontSize="xl" color={"pink.400"}>
         About me
       </Text>
@@ -44,35 +56,78 @@ const Developer = () => {
         I am a frontend developer with a <strong>2+ years</strong> of experience
       </Text>
 
-      <Divider width={"34%"} borderColor={"pink.400"} />
+      <Divider width={"500px"} borderColor={"pink.400"} />
       <Flex gap={"10px"} mb={"20px"}>
         <Text fontSize="m" color={"grey"}>
           Skills:
         </Text>
         <Flex alignItems={"center"} gap={"1"}>
-          <IoLogoJavascript size={"20px"} />
-          <BiLogoTypescript size={"23px"} />
-          <TiHtml5 size={"23px"} />
-          <MdCss size={"25px"} />
-          <IoLogoSass size={"21px"} />
-          <FaReact size={"21px"} />
-          <TbBrandRedux size={"21px"} />
-          <SiReactrouter size={"21px"} />
-          <SiReacthookform size={"19px"} />
-          <GrGraphQl size={"20px"} />
-          <FaGitAlt size={"21px"} />
-          <SiWebpack size={"21px"} />
-          <TbBrandVite size={"22px"} />
-          <SiJest size={"22px"} />
-          <FaJira size={"21px"} />
-          <FaConfluence size={"18px"} />
-          <FaFigma size={"18px"} />
-          <SiChakraui size={"18px"} />
+          <Text css={iconStyle}>
+            <IoLogoJavascript size={"20px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <BiLogoTypescript size={"23px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <TiHtml5 size={"23px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <MdCss size={"25px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <IoLogoSass size={"21px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <FaReact size={"21px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <TbBrandRedux size={"21px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <SiReactrouter size={"21px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <SiReacthookform size={"19px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <GrGraphQl size={"20px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <FaGitAlt size={"21px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <SiWebpack size={"21px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <TbBrandVite size={"22px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <SiJest size={"22px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <FaJira size={"21px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <FaConfluence size={"18px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <FaFigma size={"18px"} />
+          </Text>
+          <Text css={iconStyle}>
+            <SiChakraui size={"18px"} />
+          </Text>
         </Flex>
       </Flex>
 
+      <address>
+        Written by{" "}
+        <a href="mailto:kirill.terekhin.98@bk.ru">
+          <b>Kirill Terekhin</b>
+        </a>
+      </address>
+
       {/* VARIANT 1 */}
-      <Box
+      {/* <Box
         display={"flex"}
         justifyContent={"center"}
         width={"100%"}
@@ -87,7 +142,7 @@ const Developer = () => {
           animation={`${rotate} infinite 1.5s linear`}
         />
         <Image src={fire} boxSize="300px" />
-      </Box>
+      </Box> */}
 
       {/* VARIANT 2 */}
       {/* <Text fontSize="xl" color={"pink.400"}>
