@@ -92,6 +92,7 @@ const PokemonCardsList = () => {
             cursor={"pointer"}
             mt={5}
             transition={"0.3s"}
+            zIndex={10}
             _hover={{ transform: "scale(1.2)" }}
             width={"30px"}
             onClick={() => setCardsToShow(cardsToShow + 8)}

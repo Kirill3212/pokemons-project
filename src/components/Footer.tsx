@@ -1,6 +1,9 @@
 import { Flex, UnorderedList, ListItem } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
   return (
     <Flex height={"15vh"} width={"100%"} lineHeight={"1.3"}>
       <UnorderedList
@@ -31,22 +34,23 @@ const Footer = () => {
           </a>
         </ListItem>
         <ListItem>
-          <a href="https://t.me/kir_55_1" target="blank">
+          <a href="https://t.me/kir_55_3" target="blank">
             Telegram
           </a>
         </ListItem>
         <ListItem>
-          <a
+          <p
             style={{
               color: "gray",
               background:
                 "linear-gradient(to right, #ff0000, #ffff00, #00ff00)",
               backgroundClip: "text",
+              cursor: "pointer",
             }}
-            href="/Developer"
+            onClick={() => navigate("/developer")}
           >
             Developer
-          </a>
+          </p>
         </ListItem>
       </UnorderedList>
     </Flex>

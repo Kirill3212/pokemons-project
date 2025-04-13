@@ -6,7 +6,7 @@ import {
   // Image,
   // keyframes,
 } from "@chakra-ui/react";
-import { css, useTheme } from "@emotion/react";
+import { css } from "@emotion/react";
 
 // Icons
 import { IoLogoJavascript } from "react-icons/io5";
@@ -37,13 +37,11 @@ const Developer = () => {
   //   to { transform: rotate(360deg); }
   // `;
 
-  const theme = useTheme();
-
   const iconStyle = css`
     cursor: pointer;
     transition: 0.3s;
     &:hover {
-      color: ${theme.colors.pink[500]};
+      color: "pink";
     }
   `;
 
@@ -53,7 +51,7 @@ const Developer = () => {
         About me
       </Text>
       <Text>
-        I am a frontend developer with a <strong>2+ years</strong> of experience
+        I am a frontend developer with a <strong>3+ years</strong> of experience
       </Text>
 
       <Divider width={"500px"} borderColor={"pink.400"} />
