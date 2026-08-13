@@ -26,9 +26,7 @@ import NotFound from "@/pages/NotFound";
 import SingleCard from "@/pages/singleCard/SingleCard";
 import Favorites from "@/pages/Favorites";
 import History from "@/pages/history/History";
-// @ts-expect-error - Skip local case sensitivity bug on Netlify
 import SignIn from "@/pages/auth/SignIn";
-// @ts-expect-error - Skip local case sensitivity bug on Netlify
 import SignUp from "@/pages/auth/SignUp";
 import Search from "@/pages/Search";
 
