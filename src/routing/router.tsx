@@ -26,7 +26,9 @@ import NotFound from "@/pages/NotFound";
 import SingleCard from "@/pages/singleCard/SingleCard";
 import Favorites from "@/pages/Favorites";
 import History from "@/pages/history/History";
+("@ts-expect-error");
 import SignIn from "@/pages/auth/SignIn";
+("@ts-expect-error");
 import SignUp from "@/pages/auth/SignUp";
 import Search from "@/pages/Search";
 
